@@ -218,14 +218,15 @@ body {
 }
 
 /* ========================================== */
-/* Notes Grid Container */
+/* Notes / Teacher Cards Grid Styling         */
 /* ========================================== */
-
 .notes-grid-container {
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 20px !important;
+    flex-direction: row !important; /* Cards ko line mein rakhne ke liye */
+    flex-wrap: wrap !important;     /* Agar screen choti ho toh niche aa jayein */
+    align-items: stretch !important; /* Sabhi cards ki height barabar karne ke liye */
+    justify-content: center !important;
+    gap: 24px !important;
     width: 100% !important;
     padding: 0 15px !important;
 }
@@ -236,20 +237,20 @@ body {
     min-height: 75vh;
 }
 
-.notes-grid-container .note-card {
+/* Sabhi cards ka size ek jaisa fix karne ke liye */
+.notes-grid-container .note-card,
+.card {
+    flex: 1 1 280px !important; /* Minimum width 280px rahegi aur sab barabar stretch honge */
+    max-width: 340px !important; /* Koi bhi card 340px se bada nahi hoga */
     width: 100% !important;
-    max-width: 100% !important;
-    flex: none !important;
-}
-
-
-
-.note-card {
     background-color: var(--color-bg-section);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 20px;
     box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -267,6 +268,18 @@ body {
 .note-card p {
     font-size: 0.9rem;
     margin-bottom: 15px;
+    flex-grow: 1; /* Text space ko barabar manage karne ke liye */
+}
+
+/* Cards ke andar wali images ya top boxes ka size equal karne ke liye */
+.note-card img, 
+.note-card .semester-img-box,
+.card img {
+    width: 100% !important;
+    height: 240px !important; /* Teeno ki image/box ki height bilkul equal hogi */
+    object-fit: cover !important;
+    border-radius: 12px;
+    margin-bottom: 15px;
 }
 
 .download-btn {
@@ -277,7 +290,15 @@ body {
     border-radius: var(--radius-sm);
     font-weight: 500;
     font-size: 0.85rem;
+    text-align: center;
+    text-decoration: none;
+    margin-top: auto; /* Button ko hamesha card ke sabse niche align karne ke liye */
 }
+
+main {
+    padding-top: 100px !important;
+}
+
 
 main {
     padding-top: 100px !important;
