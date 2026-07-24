@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Vector</title>
+    <link rel="icon" type="image/jpeg" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="header-left">
+
+            <button class="menu-btn" id="menuToggle">☰</button>
+        
+            <div class="auto-color-logo">
+                <span class="logo-dot"></span>
+                <span class="logo-text">STUDY VECTOR</span>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- <div class="streak-badge">
+                <span class="fire-icon">🔥</span>
+                <span class="streak-count">1</span>
+            </div> -->
+
+            <!-- <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+            </button> -->
+
+            <a href="about.html" style="text-decoration: none; display: inline-block;">
+                <div class="profile-avatar">
+                    <img src="MY.jpg" alt="Profile"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+            </a>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="welcome-hero-section">
+            <div class="welcome-card">
+                <!-- Left Side: Content -->
+                <div class="welcome-content">
+                    <div class="greeting-badge">
+                        Good Night, Learner! 🫡
+                    </div>
+
+                    <h1 class="welcome-title">
+                        Welcome to <span class="highlight-brand">STUDY VECTOR</span>
+                    </h1>
+
+                    <p class="welcome-subtitle">
+                        Discover premium educational apps and tools designed to help you learn smarter.
+                    </p>
+
+                    <div class="welcome-btn-group">
+                        <a href="#apps" class="btn-primary">
+                            <span class="btn-icon">⋮⋮</span> Explore Apps
+                        </a>
+                        <a href="./Notes.html" class="btn-secondary">
+                            <span class="btn-icon">📁</span> Categories
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side: Visual Graphic Elements -->
+                <div class="welcome-graphic">
+                    <!-- Floating Small Icons -->
+                    <div class="floating-icon icon-book">📖</div>
+                    <div class="floating-icon icon-trophy">🏆</div>
+                    <div class="floating-icon icon-play">▶</div>
+
+                    <!-- Graduation Cap & Books Center Graphics -->
+                    <div class="graphic-center-art">
+                        <div class="grad-cap">🎓</div>
+                        <div class="stacked-books">
+                            <div class="book book-top"></div>
+                            <div class="book book-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teacher Selection Section -->
+        <main class="main-content">
+            <section class="notes-hero">
+                <h1 class="gradient-text">Select Teacher</h1>
+                <p>Choose a teacher to view their subject-wise notes and class PDFs.</p>
+            </section>
+
+            <section class="notes-grid-container">
+
+                <!-- Teacher 1: Khan Sir -->
+                <div class="note-card teacher-card">
+                    <div class="teacher-img-box">
+                        <img src="khan sir.jpg" alt="Khan Sir">
+                    </div>
+                    <h3>Khan Sir</h3>
+                    <p>Access History, Geography, Polity, Science, and Economy etc.</p>
+                    <a href="./khan sir_notes.html" class="download-btn">View all notes.</a>
+                </div>
+
+                <!-- Teacher 2: Dr. Raushan Anand Sir -->
+                <div class="note-card teacher-card">
+                    <div class="teacher-img-box">
+                        <img src="dr. raushan anand sir.jpg" alt="Dr. Raushan Anand Sir">
+                    </div>
+                    <h3>Dr. Raushan Anand Sir</h3>
+                    <p>Access History, Geography, Polity, Science, and Economy etc.</p>
+                    <a href="#" class="download-btn">Soon....</a>
+                </div>
+
+                <!-- Teacher 3: Other Teacher / Self Notes -->
+                <div class="note-card teacher-card">
+                    <div class="teacher-img-box">
+                        <img src="semester-notes.png" alt="Semester Notes">
+                    </div>
+                    <h3>Semester & Other Notes</h3>
+                    <p>Standard semester books, important formulas, and extra study material.</p>
+                    <a href="#" class="download-btn">View Notes</a>
+                </div>
+
+            </section>
+
+
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <p>&copy; 2026 StudyVector. Provided by <strong>Mr Mr_VICKY</strong>.</p>
+                </div>
+                <div class="footer-center">
+                    <p>Empowering students with smart learning resources.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="https://t.me/studyvector" target="_blank">Telegram</a>
+                    <a href="#" target="_blank">YouTube</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Sidebar Overlay (Background Dimming) -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Sidebar Drawer Container -->
+        <div class="sidebar-drawer" id="sidebarDrawer">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+
+                <div class="sidebar-brand-box">
+
+
+                    <div class="sidebar-logo-icon"
+                        style="width: 40px; height: 40px; background: #00b4d8; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="MY.jpg" alt="Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+
+                    <div>
+                        <h2 class="sidebar-title">STUDY VECTOR</h2>
+                        <p class="sidebar-subtitle">POWERED BY Mr_VICKY 🏴</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar Navigation Links -->
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html" class="nav-item active">
+                            <span class="nav-icon">🏠</span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="notes.html" class="nav-item">
+                            <span class="nav-icon">📚</span>
+                            <span>Notes & PDFs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community.html" class="nav-item">
+                            <span class="nav-icon">👥</span>
+                            <span>Community</span>
+                        </a>
+                    </li>
+
+                    <!-- <li>
+                    <a href="bookmarks.html" class="nav-item">
+                        <span class="nav-icon">🔖</span>
+                        <span>Bookmarks</span>
+                    </a>
+                </li> -->
+                    <li>
+                        <a href="#" class="nav-item">
+                            <span class="nav-icon">⚙️</span>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.html" class="nav-item">
+                            <span class="nav-icon">👤</span>
+                            <span>About Developer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Contact.html" class="nav-item">
+                            <span class="nav-icon">❓</span>
+                            <span>Help Center & Guides</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+</body>
+
+</html>

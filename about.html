@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Vector - About Developer</title>
+    <link rel="icon" type="image/jpeg" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header & Navbar -->
+    <header class="site-header">
+        <div class="header-left">
+            <button class="menu-btn" id="menuToggle">☰</button>
+            <div class="auto-color-logo">
+                <span class="logo-dot"></span>
+                <span class="logo-text">STUDY VECTOR</span>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- <div class="streak-badge">
+                <span class="fire-icon">🔥</span>
+                <span class="streak-count">1</span>
+            </div> -->
+
+            <!-- <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme"></button> -->
+
+            <a href="about.html" style="text-decoration: none; display: inline-block;">
+                <div class="profile-avatar">
+                    <img src="MY.jpg" alt="Profile"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="notes-hero">
+            <h1 class="gradient-text">About Developer</h1>
+            <p>Know more about the creator behind Study Vector.</p>
+        </div>
+
+        <!-- Developer Profile Card Section -->
+        <section class="developer-section">
+            <div class="developer-card">
+                <!-- Left Side: Profile Image with Floating Badge -->
+                <div class="dev-img-container">
+                    <img src="MY.jpg" alt="Developer Profile" class="dev-avatar">
+                    <div class="dev-floating-badge">&lt;/&gt;</div>
+                </div>
+
+                <!-- Right Side: Details -->
+                <div class="dev-info">
+                    <div class="badge-top">&lt;/&gt; FOUNDER & SOLO DEVELOPER</div>
+                    <h2>Mr_VICKY</h2>
+                    <div class="dev-subtitle">STUDY VECTOR CEO</div>
+
+                    <div class="dev-tag">
+                        <span>●</span> Solo Developer - All projects built independently
+                    </div>
+
+                    <p class="dev-bio">
+                        Solo developer building simple, fast, and secure educational apps. I love creating modern tools
+                        that help students learn better and easier.
+                    </p>
+
+                    <blockquote class="dev-quote">
+                        "Dream Big, Hustle Hard, and Never Stop Exploring!"
+                    </blockquote>
+
+                    <div class="dev-social-buttons">
+                        <a href="https://github.com" target="_blank" class="dev-btn">
+                            <span>🐱</span> GitHub
+                        </a>
+                        <a href="https://t.me/studyvector" target="_blank" class="dev-btn">
+                            <span>✈️</span> Telegram
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="dev-btn">
+                            <span>▶️</span> YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <p>&copy; 2026 StudyVector. Provided by <strong>Mr_VICKY</strong> 🏴.</p>
+            </div>
+            <div class="footer-center">
+                <p>Empowering students with smart learning resources.</p>
+            </div>
+            <div class="footer-right">
+                <a href="#" target="_blank">Instagram</a>
+                <a href="https://t.me/studyvector" target="_blank">Telegram</a>
+                <a href="#" target="_blank">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sidebar Structure Container -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="sidebar-drawer" id="sidebarDrawer">
+        <div class="sidebar-header"
+            style="display: flex; align-items: center; justify-content: space-between; padding: 20px 15px; border-bottom: 1px solid #edf2f7;">
+            <div class="sidebar-brand-box" style="display: flex; align-items: center; gap: 10px;">
+                <div class="sidebar-logo-icon"
+                    style="width: 40px; height: 40px; background: #00b4d8; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <img src="MY.jpg" alt="Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                 <div>
+                    <h2 class="sidebar-title">STUDY VECTOR</h2>
+                    <p class="sidebar-subtitle">POWERED BY Mr_VICKY 🏴</p>
+                </div>
+            </div>
+            <button class="sidebar-close-btn" id="sidebarClose"
+                style="background: #f7fafc; border: 1px solid #e2e8f0; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;">✕</button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="index.html" class="nav-item">
+                        <span class="nav-icon">🏠</span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="notes.html" class="nav-item">
+                        <span class="nav-icon">📚</span>
+                        <span>Notes & PDFs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="community.html" class="nav-item">
+                        <span class="nav-icon">👥</span>
+                        <span>Community</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="about.html" class="nav-item active">
+                        <span class="nav-icon">👤</span>
+                        <span>About Developer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./Contact.html" class="nav-item">
+                        <span class="nav-icon">❓</span>
+                        <span>Help Center & Guides</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+
+</html>
