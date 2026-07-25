@@ -138,3 +138,41 @@ document.getElementById('contact-form')?.addEventListener('submit', async functi
         alert('Network error: ' + err.message);
     }
 });
+
+
+document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const nameVal = document.getElementById('name').value.trim();
+    const emailVal = document.getElementById('email').value.trim();
+    const messageVal = document.getElementById('message').value.trim();
+
+    if (!nameVal || !emailVal || !messageVal) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
+    const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
+    
+    // Official Supabase client initialization
+    const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    try {
+        const { error } = await _supabase
+            .from('contacts')
+            .insert([{ name: nameVal, email: emailVal, message: messageVal }]);
+
+        if (error) {
+            console.error('Supabase Error:', error.message);
+            alert('Error: ' + error.message);
+            return;
+        }
+
+        alert('Message sent successfully!');
+        document.getElementById('contact-form').reset();
+    } catch (err) {
+        console.error('Network Error:', err);
+        alert('Network error: ' + err.message);
+    }
+});
