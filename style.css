@@ -276,7 +276,7 @@ body {
 .note-card .semester-img-box,
 .card img {
     width: 100% !important;
-    height: 240px !important; /* Teeno ki image/box ki height bilkul equal hogi */
+    height: 250px !important; /* Teeno ki image/box ki height bilkul equal hogi */
     object-fit: cover !important;
     border-radius: 12px;
     margin-bottom: 15px;
