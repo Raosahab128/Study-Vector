@@ -62,3 +62,36 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault(); // Page refresh hone se rokenge
+
+  const formData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    message: document.getElementById('message').value
+  };
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('Message successfully database mein save ho gaya!');
+      document.getElementById('contact-form').reset(); // Form clear kar dega
+    } else {
+      alert('Kuch error aa gayi: ' + result.error);
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Server se connect nahi ho paya.');
+  }
+});
