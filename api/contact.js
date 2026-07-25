@@ -3,12 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
 const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
 
-const supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: { persistSession: false }
-});
-
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader(
@@ -17,20 +13,21 @@ export default async function handler(req, res) {
   );
 
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
   try {
-    if (req.method !== 'POST') {
-      return res.status(400).json({ success: false, error: "Invalid request method." });
-    }
-
     let body = req.body;
     if (typeof body === 'string') {
       try {
         body = JSON.parse(body);
-      } catch (e) {}
+      } catch (e) {
+        body = {};
+      }
     }
 
     const name = body?.name;
@@ -38,9 +35,13 @@ export default async function handler(req, res) {
     const message = body?.message;
 
     if (!name || !email || !message) {
-      return res.status(400).json({ success: false, error: "Saari fields bharna zaroori hai!" });
+      return res.status(400).json({ success: false, error: 'All fields are required' });
     }
-      
+
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      auth: { persistSession: false }
+    });
+
     const { error } = await supabase
       .from('contacts')
       .insert([{ name, email, message }]);
@@ -48,10 +49,10 @@ export default async function handler(req, res) {
     if (error) {
       return res.status(500).json({ success: false, error: error.message });
     }
-      
-    return res.status(200).json({ success: true, message: "Data saved successfully!" });
 
-  } catch (error) {
-    return res.status(500).json({ success: false, error: error.message || "Server error ho gaya." });
+    return res.status(200).json({ success: true, message: 'Data saved successfully!' });
+
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message || 'Internal Server Error' });
   }
 }
