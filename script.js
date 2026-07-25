@@ -112,3 +112,11 @@ document.getElementById('contact-form')?.addEventListener('submit', async functi
         isSubmitting = false;
     }
 });
+
+
+
+fetch("notice.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("notice-container").innerHTML = data;
+  });
