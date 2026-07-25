@@ -1,11 +1,12 @@
 <style>
 .notice-board{
+    width:92%;
     max-width:1200px;
-    margin:20px auto;
+    margin:90px auto 20px;
     padding:18px;
     background:#fff;
     border:1px solid #e5e7eb;
-    border-radius:14px;
+    border-radius:16px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
     font-family:Arial,sans-serif;
 }
@@ -33,20 +34,14 @@
 
 .notice-item{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:12px 0;
+    gap:10px;
     border-bottom:1px solid #f1f1f1;
+    padding:12px 0;
 }
 
 .notice-item:last-child{
     border-bottom:none;
-}
-
-.notice-content{
-    display:flex;
-    align-items:center;
-    gap:10px;
 }
 
 .notice-badge{
@@ -56,47 +51,67 @@
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
+    flex-shrink:0;
 }
 
 .notice-badge.update{
     background:#ef4444;
 }
 
+.notice-scroll{
+    flex:1;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
 .notice-text{
-    text-decoration:none;
+    display:inline-block;
     color:#333;
-    transition:.3s;
+    text-decoration:none;
+    animation:scrollText 12s linear infinite;
 }
 
 .notice-text:hover{
+    animation-play-state:paused;
     color:#2563eb;
 }
 
 .notice-date{
     color:#666;
     font-size:13px;
+    margin-left:10px;
+    flex-shrink:0;
+}
+
+@keyframes scrollText{
+    from{
+        transform:translateX(100%);
+    }
+    to{
+        transform:translateX(-100%);
+    }
 }
 
 @media(max-width:768px){
-.notice-item{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:8px;
-}
+
+.notice-board{
+    width:95%;
+    margin:80px auto 20px;
 }
 
-  .notice-board{
-    max-width:1200px;
-    margin:90px auto 20px;   /* Header ke niche lane ke liye */
-    padding:18px;
-    background:#fff;
-    border-radius:14px;
-    border:1px solid #e5e7eb;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    position:relative;
-    z-index:1;
+.notice-header h3{
+    font-size:18px;
 }
-    
+
+.notice-item{
+    gap:8px;
+}
+
+.notice-date{
+    font-size:12px;
+}
+
+}
 </style>
 
 <div class="notice-board">
@@ -109,22 +124,26 @@
     <ul class="notice-list">
 
         <li class="notice-item">
-            <div class="notice-content">
-                <span class="notice-badge">NEW</span>
+            <span class="notice-badge">NEW</span>
+
+            <div class="notice-scroll">
                 <a href="notes.html" class="notice-text">
                     Semester 1 ke naye handwritten notes upload kar diye gaye hain!
                 </a>
             </div>
+
             <span class="notice-date">25 July</span>
         </li>
 
         <li class="notice-item">
-            <div class="notice-content">
-                <span class="notice-badge update">UPDATE</span>
+            <span class="notice-badge update">UPDATE</span>
+
+            <div class="notice-scroll">
                 <a href="Contact.html" class="notice-text">
                     Kisi bhi query ya help ke liye Contact page se direct message bhej sakte hain.
                 </a>
             </div>
+
             <span class="notice-date">24 July</span>
         </li>
 
