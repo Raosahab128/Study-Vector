@@ -95,3 +95,33 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     alert('Server se connect nahi ho paya.');
   }
 });
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
+const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    try {
+        const { error } = await supabase
+            .from('contacts')
+            .insert([{ name, email, message }]);
+
+        if (error) {
+            alert('Error: ' + error.message);
+            return;
+        }
+
+        alert('Message sent successfully!');
+        document.getElementById('contact-form').reset();
+    } catch (err) {
+        alert('Network error: ' + err.message);
+    }
+});
