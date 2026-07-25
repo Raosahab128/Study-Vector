@@ -63,38 +63,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// 1. Sidebar Toggle Functionality
-document.addEventListener("DOMContentLoaded", function() {
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebarDrawer = document.getElementById('sidebarDrawer');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const sidebarClose = document.getElementById('sidebarClose');
+// 3. Contact Form Submission (Double Entry Protected)
+let isSubmitting = false;
 
-    if (menuToggle && sidebarDrawer) {
-        menuToggle.addEventListener('click', () => {
-            sidebarDrawer.classList.add('active');
-            if (sidebarOverlay) sidebarOverlay.classList.add('active');
-        });
-    }
-
-    if (sidebarClose && sidebarDrawer) {
-        sidebarClose.addEventListener('click', () => {
-            sidebarDrawer.classList.remove('active');
-            if (sidebarOverlay) sidebarOverlay.classList.remove('active');
-        });
-    }
-
-    if (sidebarOverlay && sidebarDrawer) {
-        sidebarOverlay.addEventListener('click', () => {
-            sidebarDrawer.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-        });
-    }
-});
-
-// 2. Contact Form Submission (Direct Supabase REST API)
 document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
     e.preventDefault();
+
+    if (isSubmitting) return; // Dubara request jaane se rokege
+    isSubmitting = true;
 
     const nameVal = document.getElementById('name').value.trim();
     const emailVal = document.getElementById('email').value.trim();
@@ -102,41 +78,37 @@ document.getElementById('contact-form')?.addEventListener('submit', async functi
 
     if (!nameVal || !emailVal || !messageVal) {
         alert('Please fill in all fields.');
+        isSubmitting = false;
         return;
     }
 
     const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
     const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
 
-    try {
-        const response = await fetch(`${supabaseUrl}/rest/v1/contacts`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'apikey': supabaseKey,
-                'Authorization': `Bearer ${supabaseKey}`,
-                'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({
-                name: nameVal,
-                email: emailVal,
-                message: messageVal
-            })
-        });
+    if (!window.supabase) {
+        alert('Supabase library not loaded in HTML head.');
+        isSubmitting = false;
+        return;
+    }
 
-        if (!response.ok) {
-            const errText = await response.text();
-            console.error('Supabase Error:', errText);
-            alert('Database Error: ' + errText);
+    const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    try {
+        const { error } = await _supabase
+            .from('contacts')
+            .insert([{ name: nameVal, email: emailVal, message: messageVal }]);
+
+        if (error) {
+            alert('Error: ' + error.message);
+            isSubmitting = false;
             return;
         }
 
         alert('Message sent successfully!');
         document.getElementById('contact-form').reset();
     } catch (err) {
-        console.error('Network Error:', err);
         alert('Network error: ' + err.message);
+    } finally {
+        isSubmitting = false;
     }
 });
-
-
