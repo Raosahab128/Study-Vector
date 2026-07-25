@@ -7,7 +7,8 @@
 
 <title>Study Vector Notice Board</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -19,106 +20,162 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#eef3fb;
-padding:25px;
+background:#eef4fb;
 }
 
-/*======================
+/* =======================
 NOTICE BOARD
-======================*/
+======================= */
 
 .notice-board{
-width:95%;
-max-width:1100px;
-margin:auto;
+
+width:94%;
+max-width:1150px;
+
+margin:120px auto 40px;
+
 background:#fff;
-border-radius:24px;
+
+border-radius:22px;
+
 overflow:hidden;
+
+border:1px solid #e5e7eb;
+
 box-shadow:0 15px 35px rgba(0,0,0,.08);
+
 }
 
-/*======================
+/* =======================
 HEADER
-======================*/
+======================= */
 
 .notice-header{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
-flex-wrap:wrap;
+
 gap:20px;
-padding:25px;
+
+flex-wrap:wrap;
+
+padding:24px;
+
 background:linear-gradient(135deg,#2563eb,#0f172a);
+
 position:relative;
+
 overflow:hidden;
+
 }
 
 .notice-header::before{
+
 content:"";
+
 position:absolute;
+
 width:320px;
+
 height:320px;
-background:rgba(255,255,255,.08);
-border-radius:50%;
+
 right:-120px;
-top:-150px;
+
+top:-170px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.08);
+
 }
 
 .notice-left{
+
 display:flex;
+
 align-items:center;
+
 gap:18px;
+
 z-index:2;
+
 }
 
 .notice-icon{
+
 width:70px;
+
 height:70px;
+
 border-radius:50%;
+
 display:flex;
+
 align-items:center;
+
 justify-content:center;
-font-size:32px;
+
 background:rgba(255,255,255,.15);
+
 color:#fff;
+
+font-size:32px;
+
 animation:pulse 2s infinite;
+
 }
 
 @keyframes pulse{
 
-0%{transform:scale(1);}
-
-50%{transform:scale(1.08);}
-
-100%{transform:scale(1);}
+50%{
+transform:scale(1.08);
+}
 
 }
 
 .notice-title span{
+
 display:block;
+
 font-size:12px;
+
 letter-spacing:2px;
+
 font-weight:bold;
+
 color:#bfdbfe;
+
 text-transform:uppercase;
+
 }
 
 .notice-title h2{
+
 margin:6px 0;
+
 font-size:30px;
+
 font-weight:800;
+
 animation:headingColor 6s linear infinite;
+
 }
 
 .notice-title p{
+
 color:#dbeafe;
+
 font-size:14px;
+
 }
 
 @keyframes headingColor{
 
 0%{
-color:#ffffff;
+color:#fff;
 text-shadow:0 0 10px #fff;
 }
 
@@ -143,30 +200,46 @@ text-shadow:0 0 15px #f472b6;
 }
 
 100%{
-color:#ffffff;
+color:#fff;
 text-shadow:0 0 10px #fff;
 }
 
 }
 
 .notice-status{
+
 display:flex;
+
 align-items:center;
+
 gap:10px;
+
 padding:12px 18px;
-background:rgba(255,255,255,.12);
+
 border-radius:40px;
+
+background:rgba(255,255,255,.15);
+
 color:#fff;
-font-weight:bold;
+
+font-weight:700;
+
 z-index:2;
+
 }
 
 .live-dot{
-width:12px;
-height:12px;
-background:#22c55e;
+
+width:10px;
+
+height:10px;
+
 border-radius:50%;
+
+background:#22c55e;
+
 animation:blink 1s infinite;
+
 }
 
 @keyframes blink{
@@ -177,52 +250,78 @@ opacity:.3;
 
 }
 
-/*======================
+/* =======================
 SLIDER
-======================*/
+======================= */
 
 .slider{
+
 position:relative;
-height:290px;
+
+height:300px;
+
 overflow:hidden;
-padding:20px;
+
 background:#f8fafc;
+
+padding:20px;
+
 }
 
 .notice-card{
+
 position:absolute;
+
 top:20px;
+
 left:100%;
+
 width:calc(100% - 40px);
-background:#fff;
-border-radius:20px;
-padding:25px;
+
 opacity:0;
-transition:.6s ease;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.5s;
+
 }
 
 .notice-card.active{
+
 left:20px;
+
 opacity:1;
+
 }
 
 @media(max-width:768px){
 
+.notice-board{
+
+margin:90px auto 25px;
+
+}
+
 .notice-header{
+
 padding:18px;
+
 }
 
 .notice-title h2{
+
 font-size:22px;
+
 }
 
 .notice-title p{
+
 display:none;
+
 }
 
 .slider{
-height:380px;
+
+height:360px;
+
 }
 
 }
@@ -268,32 +367,66 @@ LIVE • 03 Notices
 </div>
 
 <div class="slider">
-    <!-- ==========================
-NOTICE CARD CSS
-========================== -->
+    <style>
 
-<style>
+/* =======================
+NOTICE CARD
+======================= */
+
+.notice-card{
+
+background:#fff;
+
+border-radius:20px;
+
+padding:25px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:20px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+border-left:6px solid #2563eb;
+
+}
 
 .notice-card.new{
-border-left:6px solid #22c55e;
+border-left-color:#22c55e;
 }
 
 .notice-card.update{
-border-left:6px solid #f59e0b;
+border-left-color:#f59e0b;
 }
 
 .notice-card.hot{
-border-left:6px solid #ef4444;
+border-left-color:#ef4444;
+}
+
+.notice-content{
+flex:1;
 }
 
 .notice-badge{
+
 display:inline-block;
-padding:8px 18px;
+
+padding:7px 16px;
+
 border-radius:30px;
+
 color:#fff;
+
 font-size:12px;
-font-weight:bold;
-margin-bottom:15px;
+
+font-weight:700;
+
+margin-bottom:12px;
+
 }
 
 .notice-badge.new{
@@ -317,33 +450,74 @@ opacity:.4;
 
 }
 
-.notice-card h3{
+.notice-content h3{
+
 font-size:22px;
-color:#0f172a;
-margin-bottom:12px;
+
+color:#111827;
+
+margin-bottom:10px;
+
 }
 
-.notice-card p{
-font-size:20pxpx;
+.notice-content p{
+
+font-size:15px;
+
 line-height:1.7;
+
 color:#555;
+
 margin-bottom:18px;
+
 }
 
 .notice-btn{
+
 display:inline-block;
+
 padding:12px 24px;
+
 background:#2563eb;
+
 color:#fff;
+
 text-decoration:none;
+
 border-radius:30px;
+
 font-weight:bold;
+
 transition:.3s;
+
 }
 
 .notice-btn:hover{
+
 background:#1d4ed8;
+
 transform:translateY(-2px);
+
+}
+
+@media(max-width:768px){
+
+.notice-card{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.notice-btn{
+
+width:100%;
+
+text-align:center;
+
+}
+
 }
 
 </style>
@@ -352,15 +526,15 @@ transform:translateY(-2px);
 
 <div class="notice-card new active">
 
-<div class="notice-badge new">
-NEW
-</div>
+<div class="notice-content">
+
+<span class="notice-badge new">NEW</span>
 
 <h3>📚 Dr. Raushan Anand Sir PDF Notes</h3>
 
 <p>
-Latest handwritten PDF Notes are available.
-Click below to download the complete notes.
+Latest handwritten PDF notes are available for all students.
+Download them now.
 </p>
 
 <a href="notes.html" class="notice-btn">
@@ -369,19 +543,21 @@ Download PDF
 
 </div>
 
+</div>
+
 <!-- NOTICE 2 -->
 
 <div class="notice-card update">
 
-<div class="notice-badge update">
-UPDATE
-</div>
+<div class="notice-content">
+
+<span class="notice-badge update">UPDATE</span>
 
 <h3>📢 Contact Support</h3>
 
 <p>
 If you have any query or need help,
-you can contact us through the Contact Page.
+please contact us through the Contact page.
 </p>
 
 <a href="Contact.html" class="notice-btn">
@@ -390,13 +566,15 @@ Open Contact
 
 </div>
 
+</div>
+
 <!-- NOTICE 3 -->
 
 <div class="notice-card hot">
 
-<div class="notice-badge hot">
-HOT
-</div>
+<div class="notice-content">
+
+<span class="notice-badge hot">HOT</span>
 
 <h3>🚔 Bihar Police Practice Set</h3>
 
@@ -405,11 +583,11 @@ Bihar Police Practice Set PDF will be uploaded soon.
 Stay connected with Study Vector.
 </p>
 
-<a href="#">
-<span class="notice-btn">
+<a href="#" class="notice-btn">
 Coming Soon
-</span>
 </a>
+
+</div>
 
 </div>
 </div>
@@ -419,9 +597,9 @@ Coming Soon
 const cards = document.querySelectorAll(".notice-card");
 
 let current = 0;
-let auto;
+let autoSlide;
 
-/* Show Card */
+/* ---------- Show Card ---------- */
 
 function showCard(index){
 
@@ -437,7 +615,7 @@ current = index;
 
 }
 
-/* Next Card */
+/* ---------- Next ---------- */
 
 function nextCard(){
 
@@ -453,7 +631,7 @@ showCard(next);
 
 }
 
-/* Previous Card */
+/* ---------- Previous ---------- */
 
 function prevCard(){
 
@@ -469,17 +647,23 @@ showCard(prev);
 
 }
 
-/* Auto Slide */
+/* ---------- Auto Slide ---------- */
 
-function startSlider(){
+function startSlide(){
 
-auto = setInterval(nextCard,4000);
+autoSlide = setInterval(nextCard,4000);
 
 }
 
-startSlider();
+function stopSlide(){
 
-/* ---------- Mobile Swipe ---------- */
+clearInterval(autoSlide);
+
+}
+
+startSlide();
+
+/* ---------- Swipe (Mobile) ---------- */
 
 const slider = document.querySelector(".slider");
 
@@ -487,7 +671,7 @@ let startX = 0;
 
 slider.addEventListener("touchstart",(e)=>{
 
-clearInterval(auto);
+stopSlide();
 
 startX = e.touches[0].clientX;
 
@@ -503,13 +687,13 @@ nextCard();
 
 }
 
-if(endX - startX > 50){
+else if(endX - startX > 50){
 
 prevCard();
 
 }
 
-startSlider();
+startSlide();
 
 });
 
@@ -519,7 +703,7 @@ let mouseStart = 0;
 
 slider.addEventListener("mousedown",(e)=>{
 
-clearInterval(auto);
+stopSlide();
 
 mouseStart = e.clientX;
 
@@ -535,17 +719,19 @@ nextCard();
 
 }
 
-if(mouseEnd - mouseStart > 50){
+else if(mouseEnd - mouseStart > 50){
 
 prevCard();
 
 }
 
-startSlider();
+startSlide();
 
 });
 
 </script>
+
+</div>
 
 </body>
 </html>
