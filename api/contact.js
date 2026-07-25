@@ -1,8 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
-const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
-
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -30,24 +25,31 @@ export default async function handler(req, res) {
       }
     }
 
-    const name = body?.name;
-    const email = body?.email;
-    const message = body?.message;
+    const { name, email, message } = body;
 
     if (!name || !email || !message) {
       return res.status(400).json({ success: false, error: 'All fields are required' });
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey, {
-      auth: { persistSession: false }
+    // Supabase REST API URL aur Key
+    const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co/rest/v1/contacts';
+    const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
+
+    // Direct fetch request bhej rahe hain bina kisi library ke
+    const dbResponse = await fetch(supabaseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ name, email, message })
     });
 
-    const { error } = await supabase
-      .from('contacts')
-      .insert([{ name, email, message }]);
-
-    if (error) {
-      return res.status(500).json({ success: false, error: error.message });
+    if (!dbResponse.ok) {
+      const errText = await dbResponse.text();
+      return res.status(500).json({ success: false, error: errText || 'Database error' });
     }
 
     return res.status(200).json({ success: true, message: 'Data saved successfully!' });
