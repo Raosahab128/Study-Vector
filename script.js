@@ -63,13 +63,47 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// 3. Contact Form Submission (Direct Supabase REST API - No Module Error)
+// 1. Sidebar Toggle Functionality
+document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebarDrawer = document.getElementById('sidebarDrawer');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarClose = document.getElementById('sidebarClose');
+
+    if (menuToggle && sidebarDrawer) {
+        menuToggle.addEventListener('click', () => {
+            sidebarDrawer.classList.add('active');
+            if (sidebarOverlay) sidebarOverlay.classList.add('active');
+        });
+    }
+
+    if (sidebarClose && sidebarDrawer) {
+        sidebarClose.addEventListener('click', () => {
+            sidebarDrawer.classList.remove('active');
+            if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+        });
+    }
+
+    if (sidebarOverlay && sidebarDrawer) {
+        sidebarOverlay.addEventListener('click', () => {
+            sidebarDrawer.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        });
+    }
+});
+
+// 2. Contact Form Submission (Direct Supabase REST API)
 document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+    const nameVal = document.getElementById('name').value.trim();
+    const emailVal = document.getElementById('email').value.trim();
+    const messageVal = document.getElementById('message').value.trim();
+
+    if (!nameVal || !emailVal || !messageVal) {
+        alert('Please fill in all fields.');
+        return;
+    }
 
     const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
     const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
@@ -83,18 +117,24 @@ document.getElementById('contact-form')?.addEventListener('submit', async functi
                 'Authorization': `Bearer ${supabaseKey}`,
                 'Prefer': 'return=minimal'
             },
-            body: JSON.stringify({ name, email, message })
+            body: JSON.stringify({
+                name: nameVal,
+                email: emailVal,
+                message: messageVal
+            })
         });
 
         if (!response.ok) {
             const errText = await response.text();
-            alert('Error: ' + errText);
+            console.error('Supabase Error:', errText);
+            alert('Database Error: ' + errText);
             return;
         }
 
         alert('Message sent successfully!');
         document.getElementById('contact-form').reset();
     } catch (err) {
+        console.error('Network Error:', err);
         alert('Network error: ' + err.message);
     }
 });
