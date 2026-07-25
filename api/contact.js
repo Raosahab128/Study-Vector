@@ -32,8 +32,8 @@ export default async function handler(req, res) {
     }
 
     // Supabase REST API URL aur Key
-    const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co/rest/v1/contacts';
-    const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
+ const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co/rest/v1/contacts';
+const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
 
     // Direct fetch request bhej rahe hain bina kisi library ke
     const dbResponse = await fetch(supabaseUrl, {
