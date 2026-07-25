@@ -1,3 +1,4 @@
+// 1. Sidebar Toggle Functionality
 document.addEventListener("DOMContentLoaded", function() {
     const menuToggle = document.getElementById('menuToggle');
     const sidebarDrawer = document.getElementById('sidebarDrawer');
@@ -26,82 +27,43 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
-
+// 2. Promo Cards Slider Functionality
 document.addEventListener("DOMContentLoaded", function () {
     const cards = document.querySelectorAll(".promo-card");
-    let currentIndex = 0;
+    if (cards.length > 0) {
+        let currentIndex = 0;
 
-    function showCard(index) {
-        cards.forEach((card, i) => {
-            if (i === index) {
-                card.classList.add("active");
-                card.style.display = "flex";
-            } else {
-                card.classList.remove("active");
-                card.style.display = "none";
-            }
+        function showCard(index) {
+            cards.forEach((card, i) => {
+                if (i === index) {
+                    card.classList.add("active");
+                    card.style.display = "flex";
+                } else {
+                    card.classList.remove("active");
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        const nextButtons = document.querySelectorAll("#nextBtn, #nextBtn2");
+        nextButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                showCard(currentIndex);
+            });
+        });
+
+        const prevButtons = document.querySelectorAll("#prevBtn, #prevBtn2");
+        prevButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                showCard(currentIndex);
+            });
         });
     }
-
-    // Next button functionality
-    const nextButtons = document.querySelectorAll("#nextBtn, #nextBtn2");
-    nextButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % cards.length;
-            showCard(currentIndex);
-        });
-    });
-
-    // Previous button functionality
-    const prevButtons = document.querySelectorAll("#prevBtn, #prevBtn2");
-    prevButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-            showCard(currentIndex);
-        });
-    });
 });
 
-
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-  e.preventDefault(); // Page refresh hone se rokenge
-
-  const formData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    message: document.getElementById('message').value
-  };
-
-  try {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
-
-    const result = await response.json();
-    
-    if (result.success) {
-      alert('Message successfully database mein save ho gaya!');
-      document.getElementById('contact-form').reset(); // Form clear kar dega
-    } else {
-      alert('Kuch error aa gayi: ' + result.error);
-    }
-  } catch (err) {
-    console.error('Error:', err);
-    alert('Server se connect nahi ho paya.');
-  }
-});
-
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
-const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
-const supabase = createClient(supabaseUrl, supabaseKey);
-
+// 3. Contact Form Submission (Direct Supabase REST API - No Module Error)
 document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -109,13 +71,24 @@ document.getElementById('contact-form')?.addEventListener('submit', async functi
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    try {
-        const { error } = await supabase
-            .from('contacts')
-            .insert([{ name, email, message }]);
+    const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
+    const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
 
-        if (error) {
-            alert('Error: ' + error.message);
+    try {
+        const response = await fetch(`${supabaseUrl}/rest/v1/contacts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${supabaseKey}`,
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({ name, email, message })
+        });
+
+        if (!response.ok) {
+            const errText = await response.text();
+            alert('Error: ' + errText);
             return;
         }
 
