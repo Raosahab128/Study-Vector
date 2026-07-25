@@ -1,7 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+// Yahan apni Supabase URL aur Anon/Publishable Key seedhi daal dein
+const supabaseUrl = 'https://gfvqaowjvjstgbptcjlh.supabase.co';
+const supabaseKey = 'sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-';
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default async function handler(req, res) {
