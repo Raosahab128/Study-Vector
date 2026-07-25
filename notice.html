@@ -1,95 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Study Vector Notice Board</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    background:#f5f7fb;
+background:#eef3fb;
+padding:25px;
 }
 
-/* ===========================
-   NOTICE BOARD
-=========================== */
+/*======================
+NOTICE BOARD
+======================*/
 
 .notice-board{
-    width:92%;
-    max-width:1200px;
-    margin:90px auto 20px;
-    background:#fff;
-    border-radius:22px;
-    overflow:hidden;
-    border:1px solid #e5e7eb;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+width:95%;
+max-width:1100px;
+margin:auto;
+background:#fff;
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
-/* ===========================
-   HEADER
-=========================== */
+/*======================
+HEADER
+======================*/
 
 .notice-header{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    padding:22px;
-    background:linear-gradient(135deg,#2563eb,#0f172a);
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:20px;
+padding:25px;
+background:linear-gradient(135deg,#2563eb,#0f172a);
+position:relative;
+overflow:hidden;
+}
+
+.notice-header::before{
+content:"";
+position:absolute;
+width:320px;
+height:320px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+right:-120px;
+top:-150px;
+}
+
+.notice-left{
+display:flex;
+align-items:center;
+gap:18px;
+z-index:2;
 }
 
 .notice-icon{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:34px;
-    background:rgba(255,255,255,.15);
-    color:#fff;
-    animation:pulse 2s infinite;
+width:70px;
+height:70px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+background:rgba(255,255,255,.15);
+color:#fff;
+animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
-}
 
-.notice-title{
-    flex:1;
+0%{transform:scale(1);}
+
+50%{transform:scale(1.08);}
+
+100%{transform:scale(1);}
+
 }
 
 .notice-title span{
-    display:inline-block;
-    color:#bfdbfe;
-    font-size:12px;
-    letter-spacing:2px;
-    font-weight:bold;
-    text-transform:uppercase;
+display:block;
+font-size:12px;
+letter-spacing:2px;
+font-weight:bold;
+color:#bfdbfe;
+text-transform:uppercase;
 }
 
 .notice-title h2{
-    margin:6px 0;
-    font-size:30px;
-    font-weight:800;
-    animation:headingColor 6s linear infinite;
+margin:6px 0;
+font-size:30px;
+font-weight:800;
+animation:headingColor 6s linear infinite;
 }
 
 .notice-title p{
-    color:#dbeafe;
-    font-size:14px;
+color:#dbeafe;
+font-size:14px;
 }
-
-/* Color Animation */
 
 @keyframes headingColor{
 
@@ -125,129 +149,80 @@ text-shadow:0 0 10px #fff;
 
 }
 
-/* ===========================
-   LIST
-=========================== */
-
-.notice-list{
-    list-style:none;
-    padding:18px 22px;
+.notice-status{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px 18px;
+background:rgba(255,255,255,.12);
+border-radius:40px;
+color:#fff;
+font-weight:bold;
+z-index:2;
 }
 
-.notice-item{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:15px 0;
-    border-bottom:1px solid #ececec;
+.live-dot{
+width:12px;
+height:12px;
+background:#22c55e;
+border-radius:50%;
+animation:blink 1s infinite;
 }
 
-.notice-item:last-child{
-    border-bottom:none;
-}
+@keyframes blink{
 
-.notice-badge{
-    min-width:80px;
-    text-align:center;
-    background:#2563eb;
-    color:#fff;
-    padding:7px 12px;
-    border-radius:30px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.notice-badge.update{
-    background:#ef4444;
-}
-
-/* ===========================
-   TICKER
-=========================== */
-
-.notice-scroll{
-    flex:1;
-    overflow:hidden;
-    white-space:nowrap;
-}
-
-.notice-track{
-    display:inline-block;
-    padding-left:100%;
-    animation:marquee 22s linear infinite;
-}
-
-.notice-track:hover{
-    animation-play-state:paused;
-}
-
-.notice-text{
-    color:#222;
-    font-size:15px;
-    text-decoration:none;
-}
-
-.notice-text:hover{
-    color:#2563eb;
-}
-
-.notice-date{
-    color:#777;
-    font-size:13px;
-}
-
-@keyframes marquee{
-
-0%{
-transform:translateX(0);
-}
-
-100%{
-transform:translateX(-100%);
+50%{
+opacity:.3;
 }
 
 }
 
-/* ===========================
-   MOBILE
-=========================== */
+/*======================
+SLIDER
+======================*/
+
+.slider{
+position:relative;
+height:290px;
+overflow:hidden;
+padding:20px;
+background:#f8fafc;
+}
+
+.notice-card{
+position:absolute;
+top:20px;
+left:100%;
+width:calc(100% - 40px);
+background:#fff;
+border-radius:20px;
+padding:25px;
+opacity:0;
+transition:.6s ease;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.notice-card.active{
+left:20px;
+opacity:1;
+}
 
 @media(max-width:768px){
 
-.notice-board{
-width:95%;
-margin:80px auto 20px;
-}
-
 .notice-header{
-padding:16px;
-}
-
-.notice-icon{
-width:55px;
-height:55px;
-font-size:26px;
+padding:18px;
 }
 
 .notice-title h2{
-font-size:21px;
+font-size:22px;
 }
 
 .notice-title p{
 display:none;
 }
 
-.notice-item{
-gap:10px;
-}
-
-.notice-badge{
-min-width:65px;
-font-size:11px;
-}
-
-.notice-date{
-display:none;
+.slider{
+height:380px;
 }
 
 }
@@ -261,6 +236,8 @@ display:none;
 <div class="notice-board">
 
 <div class="notice-header">
+
+<div class="notice-left">
 
 <div class="notice-icon">
 📢
@@ -280,90 +257,295 @@ Stay informed with the latest announcements, notes and study resources.
 
 </div>
 
-<ul class="notice-list">
+<div class="notice-status">
 
-    <!-- 1 notice -->
+<div class="live-dot"></div>
 
-<li class="notice-item">
+LIVE • 03 Notices
 
-<span class="notice-badge">
-soon... </span>
+</div>
 
-<div class="notice-scroll">
+</div>
 
-<div class="notice-track">
+<div class="slider">
+    <!-- ==========================
+NOTICE CARD CSS
+========================== -->
 
-<a href="notes.html" class="notice-text">
-📚 Dr Raushan Anand sir Pdf 📄.
+<style>
+
+.notice-card.new{
+border-left:6px solid #22c55e;
+}
+
+.notice-card.update{
+border-left:6px solid #f59e0b;
+}
+
+.notice-card.hot{
+border-left:6px solid #ef4444;
+}
+
+.notice-badge{
+display:inline-block;
+padding:8px 18px;
+border-radius:30px;
+color:#fff;
+font-size:12px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.notice-badge.new{
+background:#22c55e;
+}
+
+.notice-badge.update{
+background:#f59e0b;
+}
+
+.notice-badge.hot{
+background:#ef4444;
+animation:flash 1s infinite;
+}
+
+@keyframes flash{
+
+50%{
+opacity:.4;
+}
+
+}
+
+.notice-card h3{
+font-size:22px;
+color:#0f172a;
+margin-bottom:12px;
+}
+
+.notice-card p{
+font-size:20pxpx;
+line-height:1.7;
+color:#555;
+margin-bottom:18px;
+}
+
+.notice-btn{
+display:inline-block;
+padding:12px 24px;
+background:#2563eb;
+color:#fff;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+}
+
+.notice-btn:hover{
+background:#1d4ed8;
+transform:translateY(-2px);
+}
+
+</style>
+
+<!-- NOTICE 1 -->
+
+<div class="notice-card new active">
+
+<div class="notice-badge new">
+NEW
+</div>
+
+<h3>📚 Dr. Raushan Anand Sir PDF Notes</h3>
+
+<p>
+Latest handwritten PDF Notes are available.
+Click below to download the complete notes.
+</p>
+
+<a href="notes.html" class="notice-btn">
+Download PDF
 </a>
 
 </div>
 
-</div>
+<!-- NOTICE 2 -->
 
-<span class="notice-date">
-25 July
-</span>
+<div class="notice-card update">
 
-</li>
-
-     <!-- 2 notice -->
-    
-<li class="notice-item">
-
-<span class="notice-badge update">
+<div class="notice-badge update">
 UPDATE
-</span>
+</div>
 
-<div class="notice-scroll">
+<h3>📢 Contact Support</h3>
 
-<div class="notice-track">
+<p>
+If you have any query or need help,
+you can contact us through the Contact Page.
+</p>
 
-<a href="Contact.html" class="notice-text">
-📢 Kisi bhi query ya help ke liye Contact page se direct message bhej sakte hain.
+<a href="Contact.html" class="notice-btn">
+Open Contact
 </a>
 
 </div>
 
+<!-- NOTICE 3 -->
+
+<div class="notice-card hot">
+
+<div class="notice-badge hot">
+HOT
 </div>
 
-<span class="notice-date">
-25 July
+<h3>🚔 Bihar Police Practice Set</h3>
+
+<p>
+Bihar Police Practice Set PDF will be uploaded soon.
+Stay connected with Study Vector.
+</p>
+
+<a href="#">
+<span class="notice-btn">
+Coming Soon
 </span>
-
-</li>
-
-     <!-- 3 notice -->
-
-    <li class="notice-item">
-
-<span class="notice-badge">
-soon...
-</span>
-
-<div class="notice-scroll">
-
-<div class="notice-track">
-
-<a href="Contact.html" class="notice-text">
-📢 Bihar police set paper.
 </a>
 
 </div>
-
 </div>
 
-<span class="notice-date">
-25 July
-</span>
+<script>
 
-</li>
+const cards = document.querySelectorAll(".notice-card");
 
-    
+let current = 0;
+let auto;
 
-</ul>
+/* Show Card */
 
-</div>
+function showCard(index){
+
+cards.forEach((card)=>{
+
+card.classList.remove("active");
+
+});
+
+cards[index].classList.add("active");
+
+current = index;
+
+}
+
+/* Next Card */
+
+function nextCard(){
+
+let next = current + 1;
+
+if(next >= cards.length){
+
+next = 0;
+
+}
+
+showCard(next);
+
+}
+
+/* Previous Card */
+
+function prevCard(){
+
+let prev = current - 1;
+
+if(prev < 0){
+
+prev = cards.length - 1;
+
+}
+
+showCard(prev);
+
+}
+
+/* Auto Slide */
+
+function startSlider(){
+
+auto = setInterval(nextCard,4000);
+
+}
+
+startSlider();
+
+/* ---------- Mobile Swipe ---------- */
+
+const slider = document.querySelector(".slider");
+
+let startX = 0;
+
+slider.addEventListener("touchstart",(e)=>{
+
+clearInterval(auto);
+
+startX = e.touches[0].clientX;
+
+});
+
+slider.addEventListener("touchend",(e)=>{
+
+let endX = e.changedTouches[0].clientX;
+
+if(startX - endX > 50){
+
+nextCard();
+
+}
+
+if(endX - startX > 50){
+
+prevCard();
+
+}
+
+startSlider();
+
+});
+
+/* ---------- Mouse Drag ---------- */
+
+let mouseStart = 0;
+
+slider.addEventListener("mousedown",(e)=>{
+
+clearInterval(auto);
+
+mouseStart = e.clientX;
+
+});
+
+slider.addEventListener("mouseup",(e)=>{
+
+let mouseEnd = e.clientX;
+
+if(mouseStart - mouseEnd > 50){
+
+nextCard();
+
+}
+
+if(mouseEnd - mouseStart > 50){
+
+prevCard();
+
+}
+
+startSlider();
+
+});
+
+</script>
 
 </body>
 </html>
