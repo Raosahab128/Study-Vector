@@ -1,27 +1,21 @@
-import { neon } from '@neondatabase/serverless';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default async function handler(req, res) {
   try {
-    const sql = neon(process.env.STORAGE_POSTGRES_URL || process.env.DATABASE_URL);
-
     if (req.method === 'POST') {
       const { name, email, message } = req.body;
       
-      // Table agar nahi bani hogi toh yeh automatically bana lega
-      await sql`
-        CREATE TABLE IF NOT EXISTS contacts (
-          id SERIAL PRIMARY KEY,
-          name TEXT,
-          email TEXT,
-          message TEXT
-        );
-      `;
+      const { data, error } = await supabase
+        .from('contacts')
+        .insert([{ name, email, message }]);
 
-      // Form ka data table mein insert karega
-      await sql`
-        INSERT INTO contacts (name, email, message) 
-        VALUES (${name}, ${email}, ${message})
-      `;
+      if (error) {
+        throw error;
+      }
       
       return res.status(200).json({ success: true, message: "Data saved successfully!" });
     }
