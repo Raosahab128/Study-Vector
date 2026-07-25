@@ -1,17 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Vector Notice Board</title>
+
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+/* ===========================
+   NOTICE BOARD
+=========================== */
+
 .notice-board{
     width:92%;
     max-width:1200px;
     margin:90px auto 20px;
     background:#fff;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    border-radius:22px;
     overflow:hidden;
     border:1px solid #e5e7eb;
-    font-family:'Segoe UI',sans-serif;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-/* Professional Header */
+/* ===========================
+   HEADER
+=========================== */
+
 .notice-header{
     display:flex;
     align-items:center;
@@ -21,15 +46,22 @@
 }
 
 .notice-icon{
-    width:65px;
-    height:65px;
+    width:70px;
+    height:70px;
     border-radius:50%;
-    background:rgba(255,255,255,.15);
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:32px;
+    justify-content:center;
+    font-size:34px;
+    background:rgba(255,255,255,.15);
     color:#fff;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
 }
 
 .notice-title{
@@ -38,36 +70,75 @@
 
 .notice-title span{
     display:inline-block;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:2px;
     color:#bfdbfe;
+    font-size:12px;
+    letter-spacing:2px;
+    font-weight:bold;
     text-transform:uppercase;
 }
 
 .notice-title h2{
-    margin:5px 0;
-    font-size:28px;
-    color:#fff;
+    margin:6px 0;
+    font-size:30px;
+    font-weight:800;
+    animation:headingColor 6s linear infinite;
 }
 
 .notice-title p{
-    margin:0;
     color:#dbeafe;
     font-size:14px;
 }
 
+/* Color Animation */
+
+@keyframes headingColor{
+
+0%{
+color:#ffffff;
+text-shadow:0 0 10px #fff;
+}
+
+20%{
+color:#facc15;
+text-shadow:0 0 15px #facc15;
+}
+
+40%{
+color:#22c55e;
+text-shadow:0 0 15px #22c55e;
+}
+
+60%{
+color:#38bdf8;
+text-shadow:0 0 15px #38bdf8;
+}
+
+80%{
+color:#f472b6;
+text-shadow:0 0 15px #f472b6;
+}
+
+100%{
+color:#ffffff;
+text-shadow:0 0 10px #fff;
+}
+
+}
+
+/* ===========================
+   LIST
+=========================== */
+
 .notice-list{
     list-style:none;
-    margin:0;
-    padding:15px 20px;
+    padding:18px 22px;
 }
 
 .notice-item{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:14px 0;
+    gap:15px;
+    padding:15px 0;
     border-bottom:1px solid #ececec;
 }
 
@@ -76,11 +147,11 @@
 }
 
 .notice-badge{
-    min-width:75px;
+    min-width:80px;
     text-align:center;
     background:#2563eb;
     color:#fff;
-    padding:6px 12px;
+    padding:7px 12px;
     border-radius:30px;
     font-size:12px;
     font-weight:bold;
@@ -89,6 +160,10 @@
 .notice-badge.update{
     background:#ef4444;
 }
+
+/* ===========================
+   TICKER
+=========================== */
 
 .notice-scroll{
     flex:1;
@@ -99,7 +174,7 @@
 .notice-track{
     display:inline-block;
     padding-left:100%;
-    animation:marquee 20s linear infinite;
+    animation:marquee 22s linear infinite;
 }
 
 .notice-track:hover{
@@ -108,8 +183,8 @@
 
 .notice-text{
     color:#222;
-    text-decoration:none;
     font-size:15px;
+    text-decoration:none;
 }
 
 .notice-text:hover{
@@ -117,104 +192,147 @@
 }
 
 .notice-date{
-    color:#666;
+    color:#777;
     font-size:13px;
-    margin-left:10px;
 }
 
 @keyframes marquee{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-100%);
-    }
+
+0%{
+transform:translateX(0);
 }
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
 
 @media(max-width:768px){
 
 .notice-board{
-    width:95%;
+width:95%;
+margin:80px auto 20px;
 }
 
 .notice-header{
-    padding:16px;
+padding:16px;
 }
 
 .notice-icon{
-    width:50px;
-    height:50px;
-    font-size:24px;
+width:55px;
+height:55px;
+font-size:26px;
 }
 
 .notice-title h2{
-    font-size:20px;
+font-size:21px;
 }
 
 .notice-title p{
-    display:none;
+display:none;
 }
 
 .notice-item{
-    gap:8px;
+gap:10px;
 }
 
 .notice-badge{
-    min-width:65px;
-    font-size:11px;
+min-width:65px;
+font-size:11px;
+}
+
+.notice-date{
+display:none;
 }
 
 }
+
 </style>
+
+</head>
+
+<body>
 
 <div class="notice-board">
 
-    <div class="notice-header">
+<div class="notice-header">
 
-        <div class="notice-icon">📢</div>
+<div class="notice-icon">
+📢
+</div>
 
-        <div class="notice-title">
-            <span>OFFICIAL ANNOUNCEMENTS</span>
-            <h2>Important Notices & Updates</h2>
-            <p>Stay informed with the latest announcements, notes and study resources.</p>
-        </div>
+<div class="notice-title">
 
-    </div>
+<span>OFFICIAL ANNOUNCEMENTS</span>
 
-    <ul class="notice-list">
+<h2>Important Notices & Updates</h2>
 
-        <li class="notice-item">
-
-            <span class="notice-badge">NEW</span>
-
-            <div class="notice-scroll">
-                <div class="notice-track">
-                    <a href="notes.html" class="notice-text">
-                        📚 Semester 1 ke naye handwritten notes upload kar diye gaye hain. Ab download karein.
-                    </a>
-                </div>
-            </div>
-
-            <span class="notice-date">25 July</span>
-
-        </li>
-
-        <li class="notice-item">
-
-            <span class="notice-badge update">UPDATE</span>
-
-            <div class="notice-scroll">
-                <div class="notice-track">
-                    <a href="Contact.html" class="notice-text">
-                        📢 Kisi bhi query ya help ke liye Contact page se direct message bhej sakte hain.
-                    </a>
-                </div>
-            </div>
-
-            <span class="notice-date">24 July</span>
-
-        </li>
-
-    </ul>
+<p>
+Stay informed with the latest announcements, notes and study resources.
+</p>
 
 </div>
+
+</div>
+
+<ul class="notice-list">
+
+<li class="notice-item">
+
+<span class="notice-badge">
+NEW
+</span>
+
+<div class="notice-scroll">
+
+<div class="notice-track">
+
+<a href="notes.html" class="notice-text">
+📚 Semester 1 ke naye handwritten notes upload kar diye gaye hain. Download now and start learning today.
+</a>
+
+</div>
+
+</div>
+
+<span class="notice-date">
+25 July
+</span>
+
+</li>
+
+<li class="notice-item">
+
+<span class="notice-badge update">
+UPDATE
+</span>
+
+<div class="notice-scroll">
+
+<div class="notice-track">
+
+<a href="Contact.html" class="notice-text">
+📢 Kisi bhi query ya help ke liye Contact page se direct message bhej sakte hain.
+</a>
+
+</div>
+
+</div>
+
+<span class="notice-date">
+24 July
+</span>
+
+</li>
+
+</ul>
+
+</div>
+
+</body>
+</html>
