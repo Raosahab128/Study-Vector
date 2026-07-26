@@ -7,7 +7,7 @@
 }
 
 :root {
-    --color-primary: blue;
+    --color-primary: #00b4d8;
     --color-primary-glow: rgba(0, 180, 216, 0.2);
     --color-secondary: #f72585;
     --color-secondary-glow: rgba(247, 37, 133, 0.2);
@@ -952,7 +952,6 @@ main {
     justify-content: center;
     font-weight: bold;
     box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
-    /* border: 3px solid var(--color-surface, #ffffff); */
     animation: floatAnimation 3s ease-in-out infinite;
 }
 
@@ -960,13 +959,13 @@ main {
 /* Animation Define Karein */
 @keyframes floatAnimation {
     0% {
-        transform: translateY(0); /* Apni original position par */
+        transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px); /* Apni position se 10px upar jayega */
+        transform: translateY(-10px);
     }
     100% {
-        transform: translateY(0); /* Wapas original position par */
+        transform: translateY(0);
     }
 }
 
@@ -1347,7 +1346,7 @@ main {
     font-weight: 900 !important;
 }
 
-Dot Animation
+/* Dot Animation */
 
 .auto-color-logo .logo-dot,
 .promo-left-accent .highlight-brand .dev-floating-badge {
