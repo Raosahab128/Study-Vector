@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -18,27 +19,30 @@ font-family:'Segoe UI',sans-serif;
 
 
 body{
+
 background:transparent;
+
 padding:15px;
+
 }
 
 
 
-/* NOTICE BOARD */
+/* MAIN BOARD */
 
 .notice-board{
 
-max-width:1100px;
+max-width:800px;   /* width कम/ज्यादा करें */
 
-margin:40px auto 20px auto;
+margin:30px auto;
 
 background:white;
 
-border-radius:25px;
+border-radius:20px;
 
 overflow:hidden;
 
-box-shadow:0 20px 50px rgba(0,0,0,.12);
+box-shadow:0 15px 35px rgba(0,0,0,.12);
 
 }
 
@@ -63,7 +67,6 @@ gap:20px;
 }
 
 
-
 .notice-left{
 
 display:flex;
@@ -76,6 +79,8 @@ gap:18px;
 
 
 
+/* PIN */
+
 .notice-icon{
 
 width:75px;
@@ -84,33 +89,38 @@ height:75px;
 
 border-radius:50%;
 
+background:rgba(255,255,255,.15);
+
 display:flex;
 
 align-items:center;
 
 justify-content:center;
 
-font-size:35px;
+font-size:38px;
 
-background:rgba(255,255,255,.15);
-
-animation:pinMove 1.5s infinite alternate;
+animation:pin 1.5s infinite alternate;
 
 }
 
 
-
-@keyframes pinMove{
+@keyframes pin{
 
 from{
+
 transform:rotate(-15deg);
+
 }
 
 to{
+
 transform:rotate(15deg);
+
 }
 
 }
+
+
 
 
 
@@ -129,7 +139,6 @@ color:#bfdbfe;
 }
 
 
-
 .notice-title h2{
 
 font-size:32px;
@@ -137,7 +146,6 @@ font-size:32px;
 font-weight:900;
 
 margin:6px 0;
-
 
 background:linear-gradient(
 90deg,
@@ -148,58 +156,39 @@ background:linear-gradient(
 #ffffff
 );
 
-
 background-size:300%;
-
 
 -webkit-background-clip:text;
 
 -webkit-text-fill-color:transparent;
 
-
-animation:
-
-textColor 6s infinite,
-textGlow 2s infinite alternate;
+animation:titleGlow 5s infinite;
 
 }
 
 
 
-@keyframes textColor{
+@keyframes titleGlow{
 
 0%{
+
 background-position:0%;
+
 }
 
 50%{
+
 background-position:100%;
+
 }
 
 100%{
+
 background-position:0%;
-}
-
-}
-
-
-
-@keyframes textGlow{
-
-from{
-
-filter:drop-shadow(0 0 5px #38bdf8);
-
-}
-
-to{
-
-filter:drop-shadow(0 0 18px #60a5fa);
 
 }
 
 }
-
 
 
 .notice-title p{
@@ -212,10 +201,15 @@ font-size:14px;
 
 
 
-
 /* LIVE */
 
 .status{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
 
 background:rgba(255,255,255,.15);
 
@@ -225,16 +219,9 @@ padding:12px 20px;
 
 border-radius:30px;
 
-display:flex;
-
-gap:10px;
-
-align-items:center;
-
 font-weight:bold;
 
 }
-
 
 
 .live{
@@ -252,48 +239,32 @@ animation:blink 1s infinite;
 }
 
 
-
 @keyframes blink{
 
 50%{
+
 opacity:.3;
-}
 
 }
 
+}
 
 
 
-/* SLIDER CONTAINER */
+
+/* SLIDER */
 
 .slider-container{
 
+height:320px;
+
 background:#f8fafc;
 
-padding:20px;
+padding:30px;
 
 overflow:hidden;
 
-position:relative;
-
-cursor:grab;
-
-user-select:none;
-
--webkit-user-select:none;
-
-touch-action:pan-y;
-
 }
-
-
-
-.slider-container:active{
-
-cursor:grabbing;
-
-}
-
 
 
 .slider-track{
@@ -302,37 +273,84 @@ display:flex;
 
 width:100%;
 
-transition:transform 0.4s ease-out;
-
-will-change:transform;
+transition:transform 1s cubic-bezier(.22,1,.36,1);
 
 }
 
 
+
+/* CARD */
 
 .notice-card{
 
 min-width:100%;
 
-width:100%;
-
-flex-shrink:0;
+height:260px;
 
 background:white;
 
-padding:28px;
-
 border-radius:20px;
 
-box-shadow:0 15px 35px rgba(0,0,0,.08);
+padding:30px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+position:relative;
+
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+transform-origin:top center;
+
+animation:paper .8s ease;
+
+}
+
+
+.notice-card::before{
+
+content:"📌";
+
+position:absolute;
+
+top:-22px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:35px;
 
 }
 
 
 
+@keyframes paper{
 
-/* CARD DESIGN */
+0%{
 
+opacity:0;
+
+transform:rotate(-8deg) translateY(-40px);
+
+}
+
+
+100%{
+
+opacity:1;
+
+transform:rotate(0);
+
+}
+
+}
+
+
+/* CARD COLOR */
 
 .notice-card.new{
 
@@ -356,9 +374,13 @@ border-left:6px solid #ef4444;
 
 
 
+
+
 .badge{
 
 display:inline-block;
+
+width:max-content;
 
 padding:7px 18px;
 
@@ -403,14 +425,29 @@ animation:flash 1s infinite;
 @keyframes flash{
 
 50%{
+
 opacity:.4;
-}
 
 }
 
+}
 
 
-.notice-card h3{
+
+
+
+/* TEXT MOVING */
+
+.text-box{
+
+overflow:hidden;
+
+width:100%;
+
+}
+
+
+.text-box h3{
 
 font-size:24px;
 
@@ -418,27 +455,56 @@ color:#0f172a;
 
 margin-bottom:12px;
 
+white-space:nowrap;
+
+animation:textMove 14s linear infinite;
+
 }
 
 
 
-.notice-card p{
+.text-box p{
 
 font-size:16px;
 
 color:#64748b;
 
-line-height:1.6;
-
 margin-bottom:20px;
 
+white-space:nowrap;
+
+animation:textMove 20s linear infinite;
+
 }
+
+
+
+@keyframes textMove{
+
+0%{
+
+transform:translateX(100%);
+
+}
+
+
+100%{
+
+transform:translateX(-100%);
+
+}
+
+}
+
+
 
 
 
 .btn{
 
 display:inline-block;
+
+width:max-content;
 
 padding:12px 25px;
 
@@ -456,10 +522,9 @@ font-weight:bold;
 
 
 
-/* MOBILE */
+
 
 @media(max-width:600px){
-
 
 .notice-header{
 
@@ -477,13 +542,26 @@ font-size:24px;
 }
 
 
-.notice-card h3{
+.notice-card{
+
+height:240px;
+
+padding:20px;
+
+}
+
+
+.text-box h3{
 
 font-size:20px;
 
 }
 
 }
+
+
+
+
 
 </style>
 
@@ -496,7 +574,6 @@ font-size:20px;
 <div class="notice-board">
 
 
-
 <div class="notice-header">
 
 
@@ -504,25 +581,33 @@ font-size:20px;
 
 
 <div class="notice-icon">
-📌
-</div>
 
+📌
+
+</div>
 
 
 <div class="notice-title">
 
+
 <span>
+
 OFFICIAL ANNOUNCEMENTS
+
 </span>
 
 
 <h2>
+
 Important Notices & Updates
+
 </h2>
 
 
 <p>
+
 Latest updates from Study Vector
+
 </p>
 
 
@@ -530,7 +615,6 @@ Latest updates from Study Vector
 
 
 </div>
-
 
 
 
@@ -549,35 +633,51 @@ LIVE
 
 
 
-<div class="slider-container" id="sliderContainer">
 
+
+<div class="slider-container" id="sliderContainer">
 
 
 <div class="slider-track" id="sliderTrack">
 
 
 
+
+
+<!-- NOTICE 1 -->
+
 <div class="notice-card new">
 
 
 <div class="badge">
+
 NEW
+
 </div>
 
 
+<div class="text-box">
+
 <h3>
+
 📚 Dr. Raushan Anand Sir PDF Notes
+
 </h3>
 
 
 <p>
-Latest handwritten PDF Notes are available.
-Download complete study material.
+
+Latest handwritten PDF Notes are available. Download complete study material.
+
 </p>
 
+</div>
 
-<a href="notes.html" class="btn" draggable="false">
+
+<a href="notes.html" class="btn">
+
 Download PDF
+
 </a>
 
 
@@ -586,27 +686,44 @@ Download PDF
 
 
 
+
+
+
+<!-- NOTICE 2 -->
 
 <div class="notice-card update">
 
 
 <div class="badge">
+
 UPDATE
+
 </div>
 
 
+<div class="text-box">
+
 <h3>
+
 📢 Contact Support
+
 </h3>
 
 
 <p>
+
 Need help? Contact Study Vector support team.
+
 </p>
 
 
-<a href="Contact.html" class="btn" draggable="false">
+</div>
+
+
+<a href="Contact.html" class="btn">
+
 Contact
+
 </a>
 
 
@@ -615,28 +732,44 @@ Contact
 
 
 
+
+
+
+<!-- NOTICE 3 -->
 
 <div class="notice-card hot">
 
 
 <div class="badge">
+
 HOT
+
 </div>
 
 
+<div class="text-box">
+
 <h3>
+
 🚔 Bihar Police Practice Set
+
 </h3>
 
 
 <p>
-Practice set PDF will be uploaded soon.
-Stay connected with Study Vector.
+
+Practice set PDF will be uploaded soon. Stay connected with Study Vector.
+
 </p>
 
 
-<a href="#" class="btn" draggable="false">
+</div>
+
+
+<a href="#" class="btn">
+
 Coming Soon
+
 </a>
 
 
@@ -644,211 +777,280 @@ Coming Soon
 
 
 
-</div>
-
-
 
 </div>
-
 
 
 </div>
 
 
-
-
+</div>
 
 <script>
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function(){
 
-    const track = document.getElementById("sliderTrack");
+const track = document.getElementById("sliderTrack");
+const cards = document.querySelectorAll(".notice-card");
+const container = document.getElementById("sliderContainer");
 
-    const cards = document.querySelectorAll(".notice-card");
+let index = 0;
+let timer;
 
-    const container = document.getElementById("sliderContainer");
 
-    let index = 0;
+/* SLIDE FUNCTION */
 
-    let slideTimer = null;
+function moveSlider(){
 
+if(index >= cards.length){
 
-    function moveSlider() {
+index = 0;
 
-        if (index >= cards.length) index = 0;
+}
 
-        if (index < 0) index = cards.length - 1;
 
-        track.style.transform = "translateX(-" + (index * 100) + "%)";
+if(index < 0){
 
-    }
+index = cards.length - 1;
 
+}
 
-    function startAuto() {
 
-        stopAuto();
+track.style.transform =
+"translateX(-" + (index * 100) + "%)";
 
-        slideTimer = setInterval(function() {
 
-            index++;
 
-            moveSlider();
+/* Card animation restart */
 
-        }, 4000);
+let card = cards[index];
 
-    }
 
+card.style.animation = "none";
 
-    function stopAuto() {
 
-        if (slideTimer) clearInterval(slideTimer);
+setTimeout(function(){
 
-    }
+card.style.animation = "paper .8s ease";
 
 
-    startAuto();
+},100);
 
 
 
-    /* SWIPE & DRAG FIX */
 
-    let startX = 0;
+/* Text restart */
 
-    let endX = 0;
+let text = card.querySelectorAll("h3,p");
 
-    let isDragging = false;
 
+text.forEach(function(item){
 
+item.style.animation="none";
 
-    // Prevent native link dragging
 
-    container.querySelectorAll("a").forEach(function(link) {
+setTimeout(function(){
 
-        link.addEventListener("dragstart", function(e) {
+item.style.animation="";
 
-            e.preventDefault();
 
-        });
+},100);
 
-    });
 
+});
 
 
-    // Touch Events
+}
 
-    container.addEventListener("touchstart", function(e) {
 
-        stopAuto();
 
-        startX = e.touches[0].clientX;
 
-        endX = startX;
 
-        isDragging = true;
+/* AUTO LOOP */
 
-    }, {passive: true});
+function startAuto(){
 
 
+stopAuto();
 
-    container.addEventListener("touchmove", function(e) {
 
-        if (!isDragging) return;
+timer = setInterval(function(){
 
-        endX = e.touches[0].clientX;
 
-    }, {passive: true});
+index++;
 
+moveSlider();
 
 
-    container.addEventListener("touchend", function() {
+},7000);
 
-        if (!isDragging) return;
 
-        isDragging = false;
+}
 
-        let diff = startX - endX;
 
-        if (diff > 40) {
 
-            index++;
 
-        } else if (diff < -40) {
+function stopAuto(){
 
-            index--;
 
-        }
+if(timer){
 
-        moveSlider();
+clearInterval(timer);
 
-        startAuto();
+}
 
-    });
 
+}
 
 
-    // Mouse Events
 
-    container.addEventListener("mousedown", function(e) {
+startAuto();
 
-        stopAuto();
 
-        startX = e.clientX;
 
-        endX = startX;
 
-        isDragging = true;
 
-    });
 
+/* TOUCH SWIPE */
 
 
-    container.addEventListener("mousemove", function(e) {
+let startX = 0;
 
-        if (!isDragging) return;
+let endX = 0;
 
-        endX = e.clientX;
 
-    });
 
+container.addEventListener("touchstart",function(e){
 
 
-    container.addEventListener("mouseup", function() {
+stopAuto();
 
-        if (!isDragging) return;
 
-        isDragging = false;
+startX = e.touches[0].clientX;
 
-        let diff = startX - endX;
 
-        if (diff > 40) {
+},{passive:true});
 
-            index++;
 
-        } else if (diff < -40) {
 
-            index--;
 
-        }
 
-        moveSlider();
+container.addEventListener("touchend",function(e){
 
-        startAuto();
 
-    });
+endX = e.changedTouches[0].clientX;
 
 
+let diff = startX - endX;
 
-    container.addEventListener("mouseleave", function() {
 
-        if (isDragging) {
 
-            isDragging = false;
+if(diff > 50){
 
-            startAuto();
+index++;
 
-        }
+}
 
-    });
+
+else if(diff < -50){
+
+index--;
+
+}
+
+
+
+moveSlider();
+
+
+startAuto();
+
+
+
+});
+
+
+
+
+
+
+
+/* MOUSE DRAG */
+
+
+let mouseDown=false;
+
+
+
+container.addEventListener("mousedown",function(e){
+
+
+stopAuto();
+
+
+mouseDown=true;
+
+startX=e.clientX;
+
+
+});
+
+
+
+
+
+container.addEventListener("mouseup",function(e){
+
+
+if(!mouseDown)return;
+
+
+mouseDown=false;
+
+
+endX=e.clientX;
+
+
+let diff=startX-endX;
+
+
+
+if(diff>50){
+
+index++;
+
+}
+
+
+else if(diff<-50){
+
+index--;
+
+}
+
+
+
+moveSlider();
+
+
+startAuto();
+
+
+});
+
+
+
+
+
+container.addEventListener("mouseleave",function(){
+
+
+mouseDown=false;
+
+
+});
+
+
 
 });
 
