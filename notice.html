@@ -281,8 +281,6 @@ cursor:grab;
 
 user-select:none;
 
-touch-action:pan-y;
-
 }
 
 
@@ -317,100 +315,7 @@ border-radius:20px;
 
 box-shadow:0 15px 35px rgba(0,0,0,.08);
 
-pointer-events:auto;
-
 }
-
-
-
-/* CONTROLS (Buttons and Dots) */
-
-.slider-controls{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:10px 20px 20px 20px;
-
-background:#f8fafc;
-
-}
-
-
-
-.slider-btn{
-
-background:#2563eb;
-
-color:white;
-
-border:none;
-
-padding:8px 16px;
-
-border-radius:20px;
-
-cursor:pointer;
-
-font-weight:bold;
-
-font-size:14px;
-
-transition:0.3s;
-
-}
-
-
-
-.slider-btn:hover{
-
-background:#1d4ed8;
-
-}
-
-
-
-.dots{
-
-display:flex;
-
-gap:6px;
-
-}
-
-
-
-.dot{
-
-width:10px;
-
-height:10px;
-
-background:#cbd5e1;
-
-border-radius:50%;
-
-cursor:pointer;
-
-transition:0.3s;
-
-}
-
-
-
-.dot.active{
-
-background:#2563eb;
-
-width:25px;
-
-border-radius:10px;
-
-}
-
 
 
 
@@ -735,20 +640,6 @@ Coming Soon
 
 
 
-<!-- Navigation Controls -->
-
-<div class="slider-controls">
-
-<button class="slider-btn" id="prevBtn">Prev</button>
-
-<div class="dots" id="dotsContainer"></div>
-
-<button class="slider-btn" id="nextBtn">Next</button>
-
-</div>
-
-
-
 </div>
 
 
@@ -757,137 +648,64 @@ Coming Soon
 
 <script>
 
-
 const track = document.getElementById("sliderTrack");
 
 const cards = document.querySelectorAll(".notice-card");
-
-const dotsContainer = document.getElementById("dotsContainer");
 
 const container = document.getElementById("sliderContainer");
 
 let index = 0;
 
-let timer;
-
-
-// Create Dots dynamically
-
-cards.forEach((_, i) => {
-
-const dot = document.createElement("div");
-
-dot.classList.add("dot");
-
-if(i === 0) dot.classList.add("active");
-
-dot.addEventListener("click", () => {
-
-index = i;
-
-updateSlider();
-
-resetTimer();
-
-});
-
-dotsContainer.appendChild(dot);
-
-});
-
-const dots = document.querySelectorAll(".dot");
+let slideInterval;
 
 
 
-function updateSlider(){
+// Function to move slides
+
+function updateSlider() {
+
+if (index >= cards.length) index = 0;
+
+if (index < 0) index = cards.length - 1;
 
 track.style.transform = `translateX(-${index * 100}%)`;
 
-dots.forEach(dot => dot.classList.remove("active"));
-
-dots[index].classList.add("active");
-
 }
 
 
 
-function next(){
+// Auto Slide every 4 Seconds
+
+function startAutoSlide() {
+
+slideInterval = setInterval(() => {
 
 index++;
 
-if(index >= cards.length){
-
-index = 0;
-
-}
-
 updateSlider();
 
-}
-
-
-
-function prev(){
-
-index--;
-
-if(index < 0){
-
-index = cards.length - 1;
-
-}
-
-updateSlider();
+}, 4000);
 
 }
 
 
 
-function resetTimer(){
+function stopAutoSlide() {
 
-clearInterval(timer);
-
-timer = setInterval(next, 4000);
+clearInterval(slideInterval);
 
 }
 
 
 
-// Start 4s Auto Slide Timer
-
-timer = setInterval(next, 4000);
-
-
-
-// Button Event Listeners
-
-document.getElementById("nextBtn").addEventListener("click", () => {
-
-next();
-
-resetTimer();
-
-});
-
-
-
-document.getElementById("prevBtn").addEventListener("click", () => {
-
-prev();
-
-resetTimer();
-
-});
+startAutoSlide();
 
 
 
 
-
-/* DRAG & SWIPE FUNCTIONALITY */
+// Drag and Swipe Support
 
 let startX = 0;
-
-let currentX = 0;
 
 let isDragging = false;
 
@@ -895,7 +713,7 @@ let isDragging = false;
 
 container.addEventListener("touchstart", (e) => {
 
-clearInterval(timer);
+stopAutoSlide();
 
 startX = e.touches[0].clientX;
 
@@ -905,45 +723,35 @@ isDragging = true;
 
 
 
-container.addEventListener("touchmove", (e) => {
+container.addEventListener("touchend", (e) => {
 
-if(!isDragging) return;
-
-currentX = e.touches[0].clientX;
-
-});
-
-
-
-container.addEventListener("touchend", () => {
-
-if(!isDragging) return;
+if (!isDragging) return;
 
 isDragging = false;
 
-let diff = startX - currentX;
+let endX = e.changedTouches[0].clientX;
 
-if(diff > 50){
+if (startX - endX > 40) {
 
-next();
+index++;
 
-} else if(diff < -50){
+} else if (endX - startX > 40) {
 
-prev();
+index--;
 
 }
 
-resetTimer();
+updateSlider();
+
+startAutoSlide();
 
 });
-
-
 
 
 
 container.addEventListener("mousedown", (e) => {
 
-clearInterval(timer);
+stopAutoSlide();
 
 startX = e.clientX;
 
@@ -953,35 +761,27 @@ isDragging = true;
 
 
 
-container.addEventListener("mousemove", (e) => {
+container.addEventListener("mouseup", (e) => {
 
-if(!isDragging) return;
-
-currentX = e.clientX;
-
-});
-
-
-
-container.addEventListener("mouseup", () => {
-
-if(!isDragging) return;
+if (!isDragging) return;
 
 isDragging = false;
 
-let diff = startX - currentX;
+let endX = e.clientX;
 
-if(diff > 50){
+if (startX - endX > 40) {
 
-next();
+index++;
 
-} else if(diff < -50){
+} else if (endX - startX > 40) {
 
-prev();
+index--;
 
 }
 
-resetTimer();
+updateSlider();
+
+startAutoSlide();
 
 });
 
@@ -989,17 +789,15 @@ resetTimer();
 
 container.addEventListener("mouseleave", () => {
 
-if(isDragging){
+if (isDragging) {
 
 isDragging = false;
 
-resetTimer();
+startAutoSlide();
 
 }
 
 });
-
-
 
 </script>
 
