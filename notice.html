@@ -264,20 +264,18 @@ opacity:.3;
 
 
 
-/* SLIDER (Fixed for proper sliding effect) */
+/* SLIDER TRACK & CONTAINER */
 
 
-.slider{
-
-height:280px;
-
-position:relative;
-
-overflow:hidden;
+.slider-container{
 
 background:#f8fafc;
 
 padding:20px;
+
+overflow:hidden;
+
+position:relative;
 
 cursor:grab;
 
@@ -285,15 +283,19 @@ cursor:grab;
 
 
 
+.slider-track{
+
+display:flex;
+
+transition:transform 0.5s ease-in-out;
+
+}
+
+
+
 .notice-card{
 
-position:absolute;
-
-top:20px;
-
-left:100%;
-
-width:calc(100% - 40px);
+min-width:100%;
 
 background:white;
 
@@ -301,25 +303,7 @@ padding:28px;
 
 border-radius:20px;
 
-opacity:0;
-
-visibility:hidden;
-
-transition:all 0.5s ease-in-out;
-
 box-shadow:0 15px 35px rgba(0,0,0,.08);
-
-}
-
-
-
-.notice-card.active{
-
-left:20px;
-
-opacity:1;
-
-visibility:visible;
 
 }
 
@@ -472,13 +456,6 @@ font-size:24px;
 }
 
 
-.slider{
-
-height:320px;
-
-}
-
-
 .notice-card h3{
 
 font-size:20px;
@@ -551,11 +528,15 @@ LIVE
 
 
 
-<div class="slider" id="slider">
+<div class="slider-container" id="sliderContainer">
 
 
 
-<div class="notice-card new active">
+<div class="slider-track" id="sliderTrack">
+
+
+
+<div class="notice-card new">
 
 
 <div class="badge">
@@ -650,10 +631,16 @@ Coming Soon
 
 
 
+</div>
+
+
+
 
 
 <script>
 
+
+const track = document.getElementById("sliderTrack");
 
 const cards = document.querySelectorAll(".notice-card");
 
@@ -663,19 +650,11 @@ let timer;
 
 
 
-function showCard(){
+function updateSlider(){
 
-cards.forEach(card => {
-
-card.classList.remove("active");
-
-});
-
-
-cards[index].classList.add("active");
+track.style.transform = `translateX(-${index * 100}%)`;
 
 }
-
 
 
 
@@ -689,7 +668,7 @@ index = 0;
 
 }
 
-showCard();
+updateSlider();
 
 }
 
@@ -705,7 +684,7 @@ index = cards.length - 1;
 
 }
 
-showCard();
+updateSlider();
 
 }
 
@@ -721,12 +700,12 @@ timer = setInterval(next, 4000);
 /* MOBILE SWIPE + DESKTOP DRAG */
 
 
-const slider = document.getElementById("slider");
+const container = document.getElementById("sliderContainer");
 
 let startX = 0;
 
 
-slider.addEventListener("touchstart", (e) => {
+container.addEventListener("touchstart", (e) => {
 
 clearInterval(timer);
 
@@ -736,7 +715,7 @@ startX = e.touches[0].clientX;
 
 
 
-slider.addEventListener("touchend", (e) => {
+container.addEventListener("touchend", (e) => {
 
 
 let endX = e.changedTouches[0].clientX;
@@ -764,7 +743,7 @@ timer = setInterval(next, 4000);
 
 
 
-slider.addEventListener("mousedown", (e) => {
+container.addEventListener("mousedown", (e) => {
 
 clearInterval(timer);
 
@@ -774,7 +753,7 @@ startX = e.clientX;
 
 
 
-slider.addEventListener("mouseup", (e) => {
+container.addEventListener("mouseup", (e) => {
 
 
 let endX = e.clientX;
