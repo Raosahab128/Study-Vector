@@ -30,7 +30,7 @@ padding:15px;
 
 max-width:1100px;
 
-margin:40px auto 20px auto; /* Header se niche adjust kiya gaya hai */
+margin:40px auto 20px auto;
 
 background:white;
 
@@ -264,12 +264,12 @@ opacity:.3;
 
 
 
-/* SLIDER (Ek baar mein ek card dikhane ke liye) */
+/* SLIDER (Fixed for proper sliding effect) */
 
 
 .slider{
 
-height:320px;
+height:280px;
 
 position:relative;
 
@@ -303,7 +303,9 @@ border-radius:20px;
 
 opacity:0;
 
-transition:.7s ease;
+visibility:hidden;
+
+transition:all 0.5s ease-in-out;
 
 box-shadow:0 15px 35px rgba(0,0,0,.08);
 
@@ -316,6 +318,8 @@ box-shadow:0 15px 35px rgba(0,0,0,.08);
 left:20px;
 
 opacity:1;
+
+visibility:visible;
 
 }
 
@@ -470,7 +474,7 @@ font-size:24px;
 
 .slider{
 
-height:360px;
+height:320px;
 
 }
 
@@ -651,9 +655,9 @@ Coming Soon
 <script>
 
 
-const cards=document.querySelectorAll(".notice-card");
+const cards = document.querySelectorAll(".notice-card");
 
-let index=0;
+let index = 0;
 
 let timer;
 
@@ -661,7 +665,7 @@ let timer;
 
 function showCard(){
 
-cards.forEach(card=>{
+cards.forEach(card => {
 
 card.classList.remove("active");
 
@@ -679,9 +683,9 @@ function next(){
 
 index++;
 
-if(index>=cards.length){
+if(index >= cards.length){
 
-index=0;
+index = 0;
 
 }
 
@@ -695,9 +699,9 @@ function prev(){
 
 index--;
 
-if(index<0){
+if(index < 0){
 
-index=cards.length-1;
+index = cards.length - 1;
 
 }
 
@@ -708,7 +712,7 @@ showCard();
 
 
 
-timer=setInterval(next,4000);
+timer = setInterval(next, 4000);
 
 
 
@@ -717,42 +721,42 @@ timer=setInterval(next,4000);
 /* MOBILE SWIPE + DESKTOP DRAG */
 
 
-const slider=document.getElementById("slider");
+const slider = document.getElementById("slider");
 
-let startX=0;
+let startX = 0;
 
 
-slider.addEventListener("touchstart",(e)=>{
+slider.addEventListener("touchstart", (e) => {
 
 clearInterval(timer);
 
-startX=e.touches[0].clientX;
+startX = e.touches[0].clientX;
 
 });
 
 
 
-slider.addEventListener("touchend",(e)=>{
+slider.addEventListener("touchend", (e) => {
 
 
-let endX=e.changedTouches[0].clientX;
+let endX = e.changedTouches[0].clientX;
 
 
-if(startX-endX>50){
+if(startX - endX > 50){
 
 next();
 
 }
 
 
-if(endX-startX>50){
+if(endX - startX > 50){
 
 prev();
 
 }
 
 
-timer=setInterval(next,4000);
+timer = setInterval(next, 4000);
 
 });
 
@@ -760,37 +764,37 @@ timer=setInterval(next,4000);
 
 
 
-slider.addEventListener("mousedown",(e)=>{
+slider.addEventListener("mousedown", (e) => {
 
 clearInterval(timer);
 
-startX=e.clientX;
+startX = e.clientX;
 
 });
 
 
 
-slider.addEventListener("mouseup",(e)=>{
+slider.addEventListener("mouseup", (e) => {
 
 
-let endX=e.clientX;
+let endX = e.clientX;
 
 
-if(startX-endX>50){
+if(startX - endX > 50){
 
 next();
 
 }
 
 
-if(endX-startX>50){
+if(endX - startX > 50){
 
 prev();
 
 }
 
 
-timer=setInterval(next,4000);
+timer = setInterval(next, 4000);
 
 });
 
