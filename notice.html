@@ -30,7 +30,7 @@ padding:15px;
 
 max-width:1100px;
 
-margin:40px auto 20px auto; /* Header se niche karne ke liye top margin badhaya hai */
+margin:40px auto 20px auto; /* Header se niche adjust kiya gaya hai */
 
 background:white;
 
@@ -264,20 +264,22 @@ opacity:.3;
 
 
 
-/* NOTICE CONTAINER (Static List) */
+/* SLIDER (Ek baar mein ek card dikhane ke liye) */
 
 
-.notice-container{
+.slider{
+
+height:320px;
+
+position:relative;
+
+overflow:hidden;
 
 background:#f8fafc;
 
-padding:25px;
+padding:20px;
 
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
+cursor:grab;
 
 }
 
@@ -285,7 +287,13 @@ gap:25px;
 
 .notice-card{
 
-width:100%;
+position:absolute;
+
+top:20px;
+
+left:100%;
+
+width:calc(100% - 40px);
 
 background:white;
 
@@ -293,7 +301,21 @@ padding:28px;
 
 border-radius:20px;
 
+opacity:0;
+
+transition:.7s ease;
+
 box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+
+
+.notice-card.active{
+
+left:20px;
+
+opacity:1;
 
 }
 
@@ -446,6 +468,13 @@ font-size:24px;
 }
 
 
+.slider{
+
+height:360px;
+
+}
+
+
 .notice-card h3{
 
 font-size:20px;
@@ -518,12 +547,11 @@ LIVE
 
 
 
-<!-- Slider ki jagah ab static container use kiya hai jisme saare notices ek sath dikhenge -->
-<div class="notice-container">
+<div class="slider" id="slider">
 
 
 
-<div class="notice-card new">
+<div class="notice-card new active">
 
 
 <div class="badge">
@@ -616,6 +644,159 @@ Coming Soon
 
 </div>
 
+
+
+
+
+<script>
+
+
+const cards=document.querySelectorAll(".notice-card");
+
+let index=0;
+
+let timer;
+
+
+
+function showCard(){
+
+cards.forEach(card=>{
+
+card.classList.remove("active");
+
+});
+
+
+cards[index].classList.add("active");
+
+}
+
+
+
+
+function next(){
+
+index++;
+
+if(index>=cards.length){
+
+index=0;
+
+}
+
+showCard();
+
+}
+
+
+
+function prev(){
+
+index--;
+
+if(index<0){
+
+index=cards.length-1;
+
+}
+
+showCard();
+
+}
+
+
+
+
+timer=setInterval(next,4000);
+
+
+
+
+
+/* MOBILE SWIPE + DESKTOP DRAG */
+
+
+const slider=document.getElementById("slider");
+
+let startX=0;
+
+
+slider.addEventListener("touchstart",(e)=>{
+
+clearInterval(timer);
+
+startX=e.touches[0].clientX;
+
+});
+
+
+
+slider.addEventListener("touchend",(e)=>{
+
+
+let endX=e.changedTouches[0].clientX;
+
+
+if(startX-endX>50){
+
+next();
+
+}
+
+
+if(endX-startX>50){
+
+prev();
+
+}
+
+
+timer=setInterval(next,4000);
+
+});
+
+
+
+
+
+slider.addEventListener("mousedown",(e)=>{
+
+clearInterval(timer);
+
+startX=e.clientX;
+
+});
+
+
+
+slider.addEventListener("mouseup",(e)=>{
+
+
+let endX=e.clientX;
+
+
+if(startX-endX>50){
+
+next();
+
+}
+
+
+if(endX-startX>50){
+
+prev();
+
+}
+
+
+timer=setInterval(next,4000);
+
+});
+
+
+
+</script>
 
 
 </body>
