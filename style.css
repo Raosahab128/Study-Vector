@@ -1380,7 +1380,16 @@ Dot Animation
 
 
 
-
+.coming-soon-btn {
+    background: linear-gradient(135deg, #00b4d8, #d946ef);
+    color: white;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    display: inline-block;
+}
 
 /* Jab screen badi ho (Tablet / Laptop), tab wapas 3 columns ho jayein */
 
