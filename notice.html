@@ -19,334 +19,497 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#eef3fb;
-padding:25px;
+
+background:#eef4ff;
+padding:30px;
+
 }
 
-/*======================
-NOTICE BOARD
-======================*/
 
-.notice-board{
-width:95%;
-max-width:1100px;
-margin:auto;
-background:#fff;
-border-radius:24px;
-overflow:hidden;
-box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
+/* MAIN BACKGROUND */
 
-/*======================
-HEADER
-======================*/
+.notice-area{
 
-.notice-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-gap:20px;
-padding:25px;
-background:linear-gradient(135deg,#2563eb,#0f172a);
 position:relative;
 overflow:hidden;
+padding:40px 0;
+
 }
+
+
+.notice-area::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background-image:
+
+linear-gradient(#2563eb15 1px,transparent 1px),
+linear-gradient(90deg,#2563eb15 1px,transparent 1px);
+
+background-size:35px 35px;
+
+animation:gridMove 15s linear infinite;
+
+}
+
+
+.notice-area::after{
+
+content:"";
+
+position:absolute;
+
+width:350px;
+height:350px;
+
+background:#2563eb;
+
+border-radius:50%;
+
+filter:blur(120px);
+
+opacity:.25;
+
+right:-120px;
+top:-100px;
+
+animation:glowMove 6s infinite alternate;
+
+}
+
+
+
+.notice-board{
+
+position:relative;
+z-index:2;
+
+width:95%;
+max-width:1100px;
+
+margin:auto;
+
+background:#fff;
+
+border-radius:25px;
+
+overflow:hidden;
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.12);
+
+}
+
+
+
+/* HEADER */
+
+
+.notice-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:25px;
+
+background:
+
+linear-gradient(135deg,#2563eb,#0f172a);
+
+position:relative;
+
+overflow:hidden;
+
+}
+
 
 .notice-header::before{
+
 content:"";
+
 position:absolute;
-width:320px;
-height:320px;
-background:rgba(255,255,255,.08);
+
+width:350px;
+
+height:350px;
+
+background:white;
+
+opacity:.08;
+
 border-radius:50%;
-right:-120px;
+
+right:-150px;
+
 top:-150px;
+
 }
+
+
 
 .notice-left{
+
 display:flex;
+
 align-items:center;
+
 gap:18px;
+
 z-index:2;
+
 }
 
+
+
 .notice-icon{
-width:70px;
-height:70px;
-border-radius:50%;
+
+width:75px;
+
+height:75px;
+
 display:flex;
+
 align-items:center;
+
 justify-content:center;
-font-size:32px;
+
+border-radius:50%;
+
 background:rgba(255,255,255,.15);
-color:#fff;
+
+font-size:35px;
+
 animation:pulse 2s infinite;
+
 }
+
+
 
 @keyframes pulse{
 
-0%{transform:scale(1);}
+50%{
 
-50%{transform:scale(1.08);}
-
-100%{transform:scale(1);}
+transform:scale(1.12);
 
 }
+
+}
+
+
 
 .notice-title span{
-display:block;
+
 font-size:12px;
+
 letter-spacing:2px;
-font-weight:bold;
+
 color:#bfdbfe;
-text-transform:uppercase;
+
+font-weight:700;
+
 }
+
+
 
 .notice-title h2{
-margin:6px 0;
+
 font-size:30px;
+
+margin:7px 0;
+
 font-weight:800;
-animation:headingColor 6s linear infinite;
+
+color:white;
+
+animation:titleGlow 5s infinite;
+
 }
+
+
 
 .notice-title p{
+
 color:#dbeafe;
+
 font-size:14px;
+
 }
 
-@keyframes headingColor{
 
-0%{
-color:#ffffff;
-text-shadow:0 0 10px #fff;
-}
 
-20%{
-color:#facc15;
-text-shadow:0 0 15px #facc15;
-}
+@keyframes titleGlow{
 
-40%{
-color:#22c55e;
-text-shadow:0 0 15px #22c55e;
-}
+50%{
 
-60%{
-color:#38bdf8;
-text-shadow:0 0 15px #38bdf8;
-}
+text-shadow:
 
-80%{
-color:#f472b6;
-text-shadow:0 0 15px #f472b6;
-}
+0 0 15px #60a5fa;
 
-100%{
-color:#ffffff;
-text-shadow:0 0 10px #fff;
 }
 
 }
+
+
 
 .notice-status{
-display:flex;
-align-items:center;
-gap:10px;
-padding:12px 18px;
-background:rgba(255,255,255,.12);
-border-radius:40px;
-color:#fff;
-font-weight:bold;
+
 z-index:2;
+
+background:rgba(255,255,255,.15);
+
+padding:12px 20px;
+
+border-radius:50px;
+
+color:white;
+
+font-weight:bold;
+
+display:flex;
+
+gap:10px;
+
+align-items:center;
+
 }
 
+
+
 .live-dot{
+
 width:12px;
+
 height:12px;
+
 background:#22c55e;
+
 border-radius:50%;
+
 animation:blink 1s infinite;
+
 }
+
 
 @keyframes blink{
 
 50%{
+
 opacity:.3;
-}
 
 }
 
-/*======================
-SLIDER
-======================*/
+}
+
+
+/* SLIDER */
+
 
 .slider{
+
 position:relative;
-height:290px;
-overflow:hidden;
-padding:20px;
+
+height:320px;
+
+padding:25px;
+
 background:#f8fafc;
+
+overflow:hidden;
+
+touch-action:pan-y;
+
+cursor:grab;
+
 }
+
+
 
 .notice-card{
+
 position:absolute;
-top:20px;
+
+top:25px;
+
 left:100%;
-width:calc(100% - 40px);
-background:#fff;
-border-radius:20px;
-padding:25px;
+
+width:calc(100% - 50px);
+
+background:white;
+
+padding:30px;
+
+border-radius:22px;
+
 opacity:0;
+
 transition:.6s ease;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+box-shadow:
+
+0 15px 35px rgba(0,0,0,.08);
+
 }
+
+
 
 .notice-card.active{
-left:20px;
+
+left:25px;
+
 opacity:1;
-}
-
-@media(max-width:768px){
-
-.notice-header{
-padding:18px;
-}
-
-.notice-title h2{
-font-size:22px;
-}
-
-.notice-title p{
-display:none;
-}
-
-.slider{
-height:380px;
-}
 
 }
 
-</style>
 
-</head>
 
-<body>
+/* CARD STYLE */
 
-<div class="notice-board">
-
-<div class="notice-header">
-
-<div class="notice-left">
-
-<div class="notice-icon">
-📢
-</div>
-
-<div class="notice-title">
-
-<span>OFFICIAL ANNOUNCEMENTS</span>
-
-<h2>Important Notices & Updates</h2>
-
-<p>
-Stay informed with the latest announcements, notes and study resources.
-</p>
-
-</div>
-
-</div>
-
-<div class="notice-status">
-
-<div class="live-dot"></div>
-
-LIVE • 03 Notices
-
-</div>
-
-</div>
-
-<div class="slider">
-  <!-- ==========================
-NOTICE CARD CSS
-========================== -->
-
-<style>
 
 .notice-card.new{
+
 border-left:6px solid #22c55e;
+
 }
+
 
 .notice-card.update{
+
 border-left:6px solid #f59e0b;
+
 }
+
 
 .notice-card.hot{
+
 border-left:6px solid #ef4444;
+
 }
+
+
 
 .notice-badge{
+
 display:inline-block;
-padding:8px 18px;
+
+padding:7px 18px;
+
 border-radius:30px;
-color:#fff;
+
+color:white;
+
 font-size:12px;
+
 font-weight:bold;
+
 margin-bottom:15px;
+
 }
+
+
 
 .notice-badge.new{
+
 background:#22c55e;
+
 }
+
 
 .notice-badge.update{
+
 background:#f59e0b;
+
 }
 
+
 .notice-badge.hot{
+
 background:#ef4444;
+
 animation:flash 1s infinite;
+
 }
+
 
 @keyframes flash{
 
 50%{
+
 opacity:.4;
+
 }
 
 }
+
 
 .notice-card h3{
-font-size:22px;
+
+font-size:23px;
+
 color:#0f172a;
+
 margin-bottom:12px;
+
 }
+
 
 .notice-card p{
-font-size:15px;
-line-height:1.7;
-color:#555;
-margin-bottom:18px;
+
+font-size:16px;
+
+color:#64748b;
+
+line-height:1.6;
+
+margin-bottom:20px;
+
 }
+
 
 .notice-btn{
+
 display:inline-block;
-padding:12px 24px;
+
 background:#2563eb;
-color:#fff;
-text-decoration:none;
+
+color:white;
+
+padding:12px 25px;
+
 border-radius:30px;
-font-weight:bold;
+
+text-decoration:none;
+
+font-weight:700;
+
 transition:.3s;
+
 }
+
 
 .notice-btn:hover{
+
+transform:translateY(-3px);
+
 background:#1d4ed8;
-transform:translateY(-2px);
+
 }
 
-</style>
+<!-- NOTICE SLIDER CONTENT -->
+
+<div class="notice-board">
+
+<!-- Header already in Part 1 -->
+
+<div class="slider" id="slider">
+
 
 <!-- NOTICE 1 -->
 
@@ -356,11 +519,13 @@ transform:translateY(-2px);
 NEW
 </div>
 
-<h3>📚 Dr. Raushan Anand Sir PDF Notes</h3>
+<h3>
+📚 Dr. Raushan Anand Sir PDF Notes
+</h3>
 
 <p>
 Latest handwritten PDF Notes are available.
-Click below to download the complete notes.
+Download complete study material from Study Vector.
 </p>
 
 <a href="notes.html" class="notice-btn">
@@ -368,6 +533,8 @@ Download PDF
 </a>
 
 </div>
+
+
 
 <!-- NOTICE 2 -->
 
@@ -377,18 +544,23 @@ Download PDF
 UPDATE
 </div>
 
-<h3>📢 Contact Support</h3>
+
+<h3>
+📢 Contact Support
+</h3>
 
 <p>
-If you have any query or need help,
-you can contact us through the Contact Page.
+Need any help? Contact our support team for queries and assistance.
 </p>
+
 
 <a href="Contact.html" class="notice-btn">
 Open Contact
 </a>
 
 </div>
+
+
 
 <!-- NOTICE 3 -->
 
@@ -398,154 +570,472 @@ Open Contact
 HOT
 </div>
 
-<h3>🚔 Bihar Police Practice Set</h3>
+
+<h3>
+🚔 Bihar Police Practice Set
+</h3>
+
 
 <p>
 Bihar Police Practice Set PDF will be uploaded soon.
 Stay connected with Study Vector.
 </p>
 
-<a href="#">
-<span class="notice-btn">
+
+<a href="#" class="notice-btn">
 Coming Soon
-</span>
 </a>
 
+
 </div>
+
+
 </div>
+
+
+
+<!-- CONTROLS -->
+
+
+<div class="controls">
+
+<button onclick="prevCard()">
+❮
+</button>
+
+
+<button onclick="nextCard()">
+❯
+</button>
+
+</div>
+
+
+
+<div class="dots" id="dots"></div>
+
+
+
+</div>
+
+
+
+<style>
+
+
+.controls{
+
+text-align:center;
+
+margin:25px 0;
+
+}
+
+
+.controls button{
+
+width:50px;
+
+height:50px;
+
+border:none;
+
+border-radius:50%;
+
+background:#2563eb;
+
+color:white;
+
+font-size:22px;
+
+cursor:pointer;
+
+margin:0 8px;
+
+box-shadow:0 10px 25px #2563eb55;
+
+transition:.3s;
+
+}
+
+
+
+.controls button:hover{
+
+transform:scale(1.1);
+
+background:#1d4ed8;
+
+}
+
+
+
+.dots{
+
+text-align:center;
+
+}
+
+
+
+.dot{
+
+display:inline-block;
+
+width:10px;
+
+height:10px;
+
+background:#cbd5e1;
+
+border-radius:50%;
+
+margin:5px;
+
+}
+
+
+
+.dot.active{
+
+background:#2563eb;
+
+}
+
+
+
+@keyframes gridMove{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(35px);
+
+}
+
+}
+
+
+
+@keyframes glowMove{
+
+from{
+
+transform:translate(0);
+
+}
+
+to{
+
+transform:translate(-70px,70px);
+
+}
+
+}
+
+
+
+@media(max-width:768px){
+
+
+body{
+
+padding:10px;
+
+}
+
+
+.notice-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+
+.notice-title h2{
+
+font-size:22px;
+
+}
+
+
+.notice-status{
+
+font-size:13px;
+
+}
+
+
+.slider{
+
+height:350px;
+
+}
+
+
+.notice-card h3{
+
+font-size:20px;
+
+}
+
+
+}
+
+
+
+</style>
+
+
+
+
 
 <script>
 
-const cards = document.querySelectorAll(".notice-card");
 
-let current = 0;
-let auto;
+const cards=document.querySelectorAll(".notice-card");
 
-/* Show Card */
+const dotsBox=document.getElementById("dots");
+
+let current=0;
+
+let autoSlide;
+
+
+
+/* CREATE DOTS */
+
+
+cards.forEach((card,index)=>{
+
+
+let dot=document.createElement("span");
+
+dot.className="dot";
+
+
+dot.onclick=()=>{
+
+showCard(index);
+
+};
+
+
+dotsBox.appendChild(dot);
+
+
+});
+
+
+
+const dots=document.querySelectorAll(".dot");
+
+
 
 function showCard(index){
 
-cards.forEach((card)=>{
+
+cards.forEach(card=>{
 
 card.classList.remove("active");
 
 });
 
+
+dots.forEach(dot=>{
+
+dot.classList.remove("active");
+
+});
+
+
+
 cards[index].classList.add("active");
 
-current = index;
+dots[index].classList.add("active");
+
+
+current=index;
+
 
 }
 
-/* Next Card */
+
+
+
+showCard(0);
+
+
+
 
 function nextCard(){
 
-let next = current + 1;
 
-if(next >= cards.length){
+current++;
 
-next = 0;
 
-}
+if(current>=cards.length){
 
-showCard(next);
+current=0;
 
 }
 
-/* Previous Card */
+
+showCard(current);
+
+
+}
+
+
 
 function prevCard(){
 
-let prev = current - 1;
 
-if(prev < 0){
+current--;
 
-prev = cards.length - 1;
 
-}
+if(current<0){
 
-showCard(prev);
+current=cards.length-1;
 
 }
 
-/* Auto Slide */
 
-function startSlider(){
+showCard(current);
 
-auto = setInterval(nextCard,4000);
 
 }
 
-startSlider();
 
-/* ---------- Mobile Swipe ---------- */
 
-const slider = document.querySelector(".slider");
 
-let startX = 0;
+/* AUTO SLIDE */
+
+
+function startAuto(){
+
+
+autoSlide=setInterval(nextCard,4000);
+
+
+}
+
+
+startAuto();
+
+
+
+
+
+
+/* MOBILE SWIPE */
+
+
+let startX=0;
+
+
+const slider=document.getElementById("slider");
+
+
 
 slider.addEventListener("touchstart",(e)=>{
 
-clearInterval(auto);
 
-startX = e.touches[0].clientX;
+clearInterval(autoSlide);
+
+
+startX=e.touches[0].clientX;
+
 
 });
+
+
+
 
 slider.addEventListener("touchend",(e)=>{
 
-let endX = e.changedTouches[0].clientX;
 
-if(startX - endX > 50){
+let endX=e.changedTouches[0].clientX;
+
+
+if(startX-endX>50){
 
 nextCard();
 
 }
 
-if(endX - startX > 50){
+
+
+if(endX-startX>50){
 
 prevCard();
 
 }
 
-startSlider();
+
+startAuto();
+
 
 });
 
-/* ---------- Mouse Drag ---------- */
 
-let mouseStart = 0;
+
+
+
+
+/* DESKTOP DRAG */
+
+
+let mouseStart=0;
+
+
 
 slider.addEventListener("mousedown",(e)=>{
 
-clearInterval(auto);
 
-mouseStart = e.clientX;
+clearInterval(autoSlide);
+
+
+mouseStart=e.clientX;
+
 
 });
 
+
+
+
 slider.addEventListener("mouseup",(e)=>{
 
-let mouseEnd = e.clientX;
 
-if(mouseStart - mouseEnd > 50){
+let mouseEnd=e.clientX;
+
+
+if(mouseStart-mouseEnd>50){
 
 nextCard();
 
 }
 
-if(mouseEnd - mouseStart > 50){
+
+if(mouseEnd-mouseStart>50){
 
 prevCard();
 
 }
 
-startSlider();
+
+startAuto();
+
 
 });
 
-</script>
 
-</body>
-</html>
+
+</script>
