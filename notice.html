@@ -1,383 +1,2124 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
+
+
 <head>
+
+
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
 <title>Study Vector Notice Board</title>
 
+
+
 <style>
+
+
+
 *{
+
 margin:0;
+
 padding:0;
+
 box-sizing:border-box;
+
 font-family:'Segoe UI',sans-serif;
+
 }
+
+
+
+
 
 body{
+
+
+
 background:transparent;
+
+
+
 padding:15px;
+
+
+
 }
+
+
+
+
+
+
 
 /* MAIN BOARD */
+
+
+
 .notice-board{
-max-width:800px;
+
+
+
+max-width:800px;   /* width कम/ज्यादा करें */
+
+
+
 margin:30px auto;
+
+
+
 background:white;
+
+
+
 border-radius:20px;
+
+
+
 overflow:hidden;
+
+
+
 box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+
+
 }
+
+
+
+
+
+
 
 /* HEADER */
+
+
+
 .notice-header{
+
+
+
 padding:25px;
+
+
+
 background:linear-gradient(135deg,#2563eb,#0f172a);
+
+
+
 display:flex;
+
+
+
 justify-content:space-between;
+
+
+
 align-items:center;
+
+
+
 gap:20px;
+
+
+
 }
+
+
+
+
 
 .notice-left{
+
+
+
 display:flex;
+
+
+
 align-items:center;
+
+
+
 gap:18px;
+
+
+
 }
+
+
+
+
+
+
 
 /* PIN */
+
+
+
 .notice-icon{
+
+
+
 width:75px;
+
+
+
 height:75px;
+
+
+
 border-radius:50%;
+
+
+
 background:rgba(255,255,255,.15);
+
+
+
 display:flex;
+
+
+
 align-items:center;
+
+
+
 justify-content:center;
+
+
+
 font-size:38px;
+
+
+
 animation:pin 1.5s infinite alternate;
+
+
+
 }
+
+
+
+
 
 @keyframes pin{
-from{ transform:rotate(-15deg); }
-to{ transform:rotate(15deg); }
+
+
+
+from{
+
+
+
+transform:rotate(-15deg);
+
+
+
 }
+
+
+
+to{
+
+
+
+transform:rotate(15deg);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 /* TITLE */
+
+
+
 .notice-title span{
+
+
+
 font-size:12px;
+
+
+
 letter-spacing:2px;
+
+
+
 font-weight:bold;
+
+
+
 color:#bfdbfe;
+
+
+
 }
 
+
+
+
+
 .notice-title h2{
+
+
+
 font-size:32px;
+
+
+
 font-weight:900;
+
+
+
 margin:6px 0;
-background:linear-gradient(90deg,#ffffff,#38bdf8,#facc15,#22c55e,#ffffff);
+
+
+
+background:linear-gradient(
+
+90deg,
+
+#ffffff,
+
+#38bdf8,
+
+#facc15,
+
+#22c55e,
+
+#ffffff
+
+);
+
+
+
 background-size:300%;
+
+
+
 -webkit-background-clip:text;
+
+
+
 -webkit-text-fill-color:transparent;
+
+
+
 animation:titleGlow 5s infinite;
+
+
+
 }
+
+
+
+
+
+
 
 @keyframes titleGlow{
-0%{ background-position:0%; }
-50%{ background-position:100%; }
-100%{ background-position:0%; }
+
+
+
+0%{
+
+
+
+background-position:0%;
+
+
+
 }
+
+
+
+50%{
+
+
+
+background-position:100%;
+
+
+
+}
+
+
+
+100%{
+
+
+
+background-position:0%;
+
+
+
+}
+
+
+
+}
+
+
+
+
 
 .notice-title p{
+
+
+
 color:#dbeafe;
+
+
+
 font-size:14px;
+
+
+
 }
+
+
+
+
+
+
 
 /* LIVE */
+
+
+
 .status{
+
+
+
 display:flex;
+
+
+
 align-items:center;
+
+
+
 gap:10px;
+
+
+
 background:rgba(255,255,255,.15);
+
+
+
 color:white;
+
+
+
 padding:12px 20px;
+
+
+
 border-radius:30px;
+
+
+
 font-weight:bold;
+
+
+
 }
+
+
+
+
 
 .live{
+
+
+
 width:12px;
+
+
+
 height:12px;
+
+
+
 background:#22c55e;
+
+
+
 border-radius:50%;
+
+
+
 animation:blink 1s infinite;
+
+
+
 }
+
+
+
+
 
 @keyframes blink{
-50%{ opacity:.3; }
+
+
+
+50%{
+
+
+
+opacity:.3;
+
+
+
 }
+
+
+
+}
+
+
+
+
+
+
+
+
 
 /* SLIDER */
+
+
+
 .slider-container{
+
+
+
 height:320px;
+
+
+
 background:#f8fafc;
+
+
+
 padding:30px;
-overflow:hidden;
-position: relative;
+
+
+
+overflow: hidden;
+
+
+
 }
+
+
+
+
 
 .slider-track{
+
+
+
 display:flex;
+
+
+
 width:100%;
-height: 100%;
-transition:transform 0.5s ease-in-out;
+
+
+
+transition:transform 1s ease-in-out;
+
+
+
 }
+
+
+
+
+
+
 
 /* CARD */
+
+
+
 .notice-card{
+
+
+
 min-width:100%;
-width:100%;
+
+  width: 100%;
+
+
+
 height:260px;
+
+
+
 background:white;
+
+
+
 border-radius:20px;
+
+
+
 padding:30px;
+
+
+
 display:flex;
+
+
+
 flex-direction:column;
+
+
+
 justify-content:center;
+
+
+
 position:relative;
+
+
+
 box-shadow:0 15px 35px rgba(0,0,0,.12);
-flex-shrink: 0;
+
+
+
+transform-origin:top center;
+
+
+
+animation:paper .8s ease;
+
+
+
 }
+
+
+
+
 
 .notice-card::before{
+
+
+
 content:"📌";
+
+
+
 position:absolute;
+
+
+
 top:-22px;
+
+
+
 left:50%;
+
+
+
 transform:translateX(-50%);
+
+
+
 font-size:35px;
+
+
+
 }
+
+
+
+
+
+
+
+@keyframes paper{
+
+
+
+0%{
+
+
+
+opacity:0;
+
+
+
+transform:rotate(-8deg) translateY(-40px);
+
+
+
+}
+
+
+
+
+
+100%{
+
+
+
+opacity:1;
+
+
+
+transform:rotate(0);
+
+
+
+}
+
+
+
+}
+
+
+
+
 
 /* CARD COLOR */
+
+
+
 .notice-card.new{
+
+
+
 border-left:6px solid #22c55e;
+
+
+
 }
+
+
+
+
 
 .notice-card.update{
+
+
+
 border-left:6px solid #f59e0b;
+
+
+
 }
+
+
+
+
 
 .notice-card.hot{
+
+
+
 border-left:6px solid #ef4444;
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
 
 .badge{
+
+
+
 display:inline-block;
+
+
+
 width:max-content;
+
+
+
 padding:7px 18px;
+
+
+
 border-radius:30px;
+
+
+
 color:white;
+
+
+
 font-size:12px;
+
+
+
 font-weight:bold;
+
+
+
 margin-bottom:15px;
+
+
+
 }
 
-.new .badge{ background:#22c55e; }
-.update .badge{ background:#f59e0b; }
-.hot .badge{ background:#ef4444; animation:flash 1s infinite; }
+
+
+
+
+
+
+.new .badge{
+
+
+
+background:#22c55e;
+
+
+
+}
+
+
+
+
+
+.update .badge{
+
+
+
+background:#f59e0b;
+
+
+
+}
+
+
+
+
+
+.hot .badge{
+
+
+
+background:#ef4444;
+
+
+
+animation:flash 1s infinite;
+
+
+
+}
+
+
+
+
+
+
 
 @keyframes flash{
-50%{ opacity:.4; }
+
+
+
+50%{
+
+
+
+opacity:.4;
+
+
+
 }
 
-/* TEXT CONTENT (Removed infinite scrolling animation to prevent layout breaking) */
-.text-box{
-width:100%;
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+/* TEXT MOVING */
+
+
+
+.text-box{
+
+
+
+overflow:hidden;
+
+
+
+width:100%;
+
+
+
+}
+
+
+
+
 
 .text-box h3{
+
+
+
 font-size:24px;
+
+
+
 color:#0f172a;
+
+
+
 margin-bottom:12px;
+
+
+
+white-space:nowrap;
+
+
+
+animation:textMove 14s linear infinite;
+
+
+
 }
+
+
+
+
+
+
 
 .text-box p{
+
+
+
 font-size:16px;
+
+
+
 color:#64748b;
+
+
+
 margin-bottom:20px;
+
+
+
+white-space:nowrap;
+
+
+
+animation:textMove 20s linear infinite;
+
+
+
 }
+
+
+
+
+
+
+
+@keyframes textMove{
+
+
+
+0%{
+
+
+
+transform:translateX(100%);
+
+
+
+}
+
+
+
+
+
+100%{
+
+
+
+transform:translateX(-100%);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 .btn{
+
+
+
 display:inline-block;
+
+
+
 width:max-content;
+
+
+
 padding:12px 25px;
+
+
+
 background:#2563eb;
+
+
+
 color:white;
+
+
+
 text-decoration:none;
+
+
+
 border-radius:30px;
+
+
+
 font-weight:bold;
+
+
+
 }
 
+
+
+
+
+
+
+
+
+
+
 @media(max-width:600px){
+
+
+
 .notice-header{
+
+
+
 flex-direction:column;
+
+
+
 align-items:flex-start;
+
+
+
 }
+
+
+
+
+
 .notice-title h2{
+
+
+
 font-size:24px;
+
+
+
 }
+
+
+
+
+
 .notice-card{
+
+
+
 height:240px;
+
+
+
 padding:20px;
+
+
+
 }
+
+
+
+
+
 .text-box h3{
+
+
+
 font-size:20px;
+
+
+
 }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
 </style>
+
+
+
 </head>
+
+
+
+
 
 <body>
 
+
+
+
+
 <div class="notice-board">
+
+
+
+
+
 <div class="notice-header">
+
+
+
+
+
 <div class="notice-left">
-<div class="notice-icon">📌</div>
+
+
+
+
+
+<div class="notice-icon">
+
+
+
+📌
+
+
+
+</div>
+
+
+
+
+
 <div class="notice-title">
-<span>OFFICIAL ANNOUNCEMENTS</span>
-<h2>Important Notices & Updates</h2>
-<p>Latest updates from Study Vector</p>
+
+
+
+
+
+<span>
+
+
+
+OFFICIAL ANNOUNCEMENTS
+
+
+
+</span>
+
+
+
+
+
+<h2>
+
+
+
+Important Notices & Updates
+
+
+
+</h2>
+
+
+
+
+
+<p>
+
+
+
+Latest updates from Study Vector
+
+
+
+</p>
+
+
+
+
+
 </div>
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
 <div class="status">
+
+
+
 <div class="live"></div>
+
+
+
 LIVE
+
+
+
 </div>
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="slider-container" id="sliderContainer">
+
+
+
+
+
 <div class="slider-track" id="sliderTrack">
 
+
+
+
+
+
+
+
+
+
+
 <!-- NOTICE 1 -->
+
+
+
 <div class="notice-card new">
-<div class="badge">NEW</div>
+
+
+
+
+
+<div class="badge">
+
+
+
+NEW
+
+
+
+</div>
+
+
+
+
+
 <div class="text-box">
-<h3>📚 Dr. Raushan Anand Sir PDF Notes</h3>
-<p>Latest handwritten PDF Notes are available. Download complete study material.</p>
+
+
+
+<h3>
+
+
+
+📚 Dr. Raushan Anand Sir PDF Notes
+
+
+
+</h3>
+
+
+
+
+
+<p>
+
+
+
+Latest handwritten PDF Notes are available. Download complete study material.
+
+
+
+</p>
+
+
+
 </div>
-<a href="notes.html" class="btn">Download PDF</a>
+
+
+
+
+
+<a href="notes.html" class="btn">
+
+
+
+Download PDF
+
+
+
+</a>
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- NOTICE 2 -->
+
+
+
 <div class="notice-card update">
-<div class="badge">UPDATE</div>
+
+
+
+
+
+<div class="badge">
+
+
+
+UPDATE
+
+
+
+</div>
+
+
+
+
+
 <div class="text-box">
-<h3>📢 Contact Support</h3>
-<p>Need help? Contact Study Vector support team.</p>
+
+
+
+<h3>
+
+
+
+📢 Contact Support
+
+
+
+</h3>
+
+
+
+
+
+<p>
+
+
+
+Need help? Contact Study Vector support team.
+
+
+
+</p>
+
+
+
+
+
 </div>
-<a href="Contact.html" class="btn">Contact</a>
+
+
+
+
+
+<a href="Contact.html" class="btn">
+
+
+
+Contact
+
+
+
+</a>
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- NOTICE 3 -->
+
+
+
 <div class="notice-card hot">
-<div class="badge">HOT</div>
-<div class="text-box">
-<h3>🚔 Bihar Police Practice Set</h3>
-<p>Practice set PDF will be uploaded soon. Stay connected with Study Vector.</p>
-</div>
-<a href="#" class="btn">Coming Soon</a>
-</div>
+
+
+
+
+
+<div class="badge">
+
+
+
+HOT
+
+
 
 </div>
+
+
+
+
+
+<div class="text-box">
+
+
+
+<h3>
+
+
+
+🚔 Bihar Police Practice Set
+
+
+
+</h3>
+
+
+
+
+
+<p>
+
+
+
+Practice set PDF will be uploaded soon. Stay connected with Study Vector.
+
+
+
+</p>
+
+
+
+
+
 </div>
+
+
+
+
+
+<a href="#" class="btn">
+
+
+
+Coming Soon
+
+
+
+</a>
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
 
 <script>
+
+
+
 window.addEventListener("load", function(){
+
+
+
 const track = document.getElementById("sliderTrack");
+
 const cards = document.querySelectorAll(".notice-card");
+
 const container = document.getElementById("sliderContainer");
 
+
+
 let index = 0;
+
 let timer;
 
+
+
+
+
+/* SLIDE FUNCTION */
+
+
+
 function moveSlider(){
+
+
+
 if(index >= cards.length){
+
+
+
 index = 0;
+
+
+
 }
+
+
+
+
+
 if(index < 0){
+
+
+
 index = cards.length - 1;
+
+
+
 }
-track.style.transform = "translateX(-" + (index * 100) + "%)";
+
+
+
+
+
+track.style.transform =
+
+"translateX(-" + (index * 100) + "%)";
+
+
+
+
+
+
+
+/* Card animation restart */
+
+
+
+let card = cards[index];
+
+
+
+
+
+card.style.animation = "none";
+
+
+
+
+
+setTimeout(function(){
+
+
+
+card.style.animation = "paper .8s ease";
+
+
+
+
+
+},100);
+
+
+
+
+
+
+
+
+
+/* Text restart */
+
+
+
+let text = card.querySelectorAll("h3,p");
+
+
+
+
+
+text.forEach(function(item){
+
+
+
+item.style.animation="none";
+
+
+
+
+
+setTimeout(function(){
+
+
+
+item.style.animation="";
+
+
+
+
+
+},100);
+
+
+
+
+
+});
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+/* AUTO LOOP */
+
+
 
 function startAuto(){
+
+
+
+
+
 stopAuto();
+
+
+
+
+
 timer = setInterval(function(){
+
+
+
+
+
 index++;
+
+
+
 moveSlider();
-}, 5000);
+
+
+
+
+
+},7000);
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 function stopAuto(){
+
+
+
+
+
 if(timer){
+
+
+
 clearInterval(timer);
-}
+
+
+
 }
 
+
+
+
+
+}
+
+
+
+
+
+
+
 startAuto();
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* TOUCH SWIPE */
+
+
+
+
+
 let startX = 0;
+
+
+
 let endX = 0;
 
-container.addEventListener("touchstart", function(e){
-stopAuto();
-startX = e.touches[0].clientX;
-}, {passive:true});
 
-container.addEventListener("touchend", function(e){
+
+
+
+
+
+container.addEventListener("touchstart",function(e){
+
+
+
+
+
+stopAuto();
+
+
+
+
+
+startX = e.touches[0].clientX;
+
+
+
+
+
+},{passive:true});
+
+
+
+
+
+
+
+
+
+
+
+container.addEventListener("touchend",function(e){
+
+
+
+
+
 endX = e.changedTouches[0].clientX;
+
+
+
+
+
 let diff = startX - endX;
 
+
+
+
+
+
+
 if(diff > 50){
+
+
+
 index++;
-} else if(diff < -50){
-index--;
+
+
+
 }
+
+
+
+
+
+else if(diff < -50){
+
+
+
+index--;
+
+
+
+}
+
+
+
+
+
+
+
 moveSlider();
+
+
+
+
+
 startAuto();
+
+
+
+
+
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* MOUSE DRAG */
-let mouseDown = false;
 
-container.addEventListener("mousedown", function(e){
+
+
+
+
+let mouseDown=false;
+
+
+
+
+
+
+
+container.addEventListener("mousedown",function(e){
+
+
+
+
+
 stopAuto();
-mouseDown = true;
-startX = e.clientX;
+
+
+
+
+
+mouseDown=true;
+
+
+
+startX=e.clientX;
+
+
+
+
+
 });
 
-container.addEventListener("mouseup", function(e){
-if(!mouseDown) return;
-mouseDown = false;
-endX = e.clientX;
-let diff = startX - endX;
 
-if(diff > 50){
+
+
+
+
+
+
+
+
+
+container.addEventListener("mouseup",function(e){
+
+
+
+
+
+if(!mouseDown)return;
+
+
+
+
+
+mouseDown=false;
+
+
+
+
+
+endX=e.clientX;
+
+
+
+
+
+let diff=startX-endX;
+
+
+
+
+
+
+
+if(diff>50){
+
+
+
 index++;
-} else if(diff < -50){
-index--;
+
+
+
 }
+
+
+
+
+
+else if(diff<-50){
+
+
+
+index--;
+
+
+
+}
+
+
+
+
+
+
+
 moveSlider();
+
+
+
+
+
 startAuto();
+
+
+
+
+
 });
 
-container.addEventListener("mouseleave", function(){
-mouseDown = false;
+
+
+
+
+
+
+
+
+
+
+container.addEventListener("mouseleave",function(){
+
+
+
+
+
+mouseDown=false;
+
+
+
+
+
 });
+
+
+
+
+
+
+
 });
+
+
+
 </script>
 
+
+
+
+
 </body>
-</html>
+
+</html> 
+
