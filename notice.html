@@ -264,7 +264,7 @@ opacity:.3;
 
 
 
-/* SLIDER TRACK & CONTAINER */
+/* SLIDER CONTAINER */
 
 
 .slider-container{
@@ -278,6 +278,18 @@ overflow:hidden;
 position:relative;
 
 cursor:grab;
+
+user-select:none;
+
+touch-action:pan-y;
+
+}
+
+
+
+.slider-container:active{
+
+cursor:grabbing;
 
 }
 
@@ -304,6 +316,98 @@ padding:28px;
 border-radius:20px;
 
 box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+pointer-events:auto;
+
+}
+
+
+
+/* CONTROLS (Buttons and Dots) */
+
+.slider-controls{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:10px 20px 20px 20px;
+
+background:#f8fafc;
+
+}
+
+
+
+.slider-btn{
+
+background:#2563eb;
+
+color:white;
+
+border:none;
+
+padding:8px 16px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+font-size:14px;
+
+transition:0.3s;
+
+}
+
+
+
+.slider-btn:hover{
+
+background:#1d4ed8;
+
+}
+
+
+
+.dots{
+
+display:flex;
+
+gap:6px;
+
+}
+
+
+
+.dot{
+
+width:10px;
+
+height:10px;
+
+background:#cbd5e1;
+
+border-radius:50%;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+
+
+.dot.active{
+
+background:#2563eb;
+
+width:25px;
+
+border-radius:10px;
 
 }
 
@@ -631,6 +735,20 @@ Coming Soon
 
 
 
+<!-- Navigation Controls -->
+
+<div class="slider-controls">
+
+<button class="slider-btn" id="prevBtn">Prev</button>
+
+<div class="dots" id="dotsContainer"></div>
+
+<button class="slider-btn" id="nextBtn">Next</button>
+
+</div>
+
+
+
 </div>
 
 
@@ -644,15 +762,50 @@ const track = document.getElementById("sliderTrack");
 
 const cards = document.querySelectorAll(".notice-card");
 
+const dotsContainer = document.getElementById("dotsContainer");
+
+const container = document.getElementById("sliderContainer");
+
 let index = 0;
 
 let timer;
+
+
+// Create Dots dynamically
+
+cards.forEach((_, i) => {
+
+const dot = document.createElement("div");
+
+dot.classList.add("dot");
+
+if(i === 0) dot.classList.add("active");
+
+dot.addEventListener("click", () => {
+
+index = i;
+
+updateSlider();
+
+resetTimer();
+
+});
+
+dotsContainer.appendChild(dot);
+
+});
+
+const dots = document.querySelectorAll(".dot");
 
 
 
 function updateSlider(){
 
 track.style.transform = `translateX(-${index * 100}%)`;
+
+dots.forEach(dot => dot.classList.remove("active"));
+
+dots[index].classList.add("active");
 
 }
 
@@ -690,19 +843,54 @@ updateSlider();
 
 
 
+function resetTimer(){
+
+clearInterval(timer);
+
+timer = setInterval(next, 4000);
+
+}
+
+
+
+// Start 4s Auto Slide Timer
 
 timer = setInterval(next, 4000);
 
 
 
+// Button Event Listeners
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+
+next();
+
+resetTimer();
+
+});
 
 
-/* MOBILE SWIPE + DESKTOP DRAG */
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+
+prev();
+
+resetTimer();
+
+});
 
 
-const container = document.getElementById("sliderContainer");
+
+
+
+/* DRAG & SWIPE FUNCTIONALITY */
 
 let startX = 0;
+
+let currentX = 0;
+
+let isDragging = false;
+
 
 
 container.addEventListener("touchstart", (e) => {
@@ -711,31 +899,41 @@ clearInterval(timer);
 
 startX = e.touches[0].clientX;
 
+isDragging = true;
+
 });
 
 
 
-container.addEventListener("touchend", (e) => {
+container.addEventListener("touchmove", (e) => {
+
+if(!isDragging) return;
+
+currentX = e.touches[0].clientX;
+
+});
 
 
-let endX = e.changedTouches[0].clientX;
 
+container.addEventListener("touchend", () => {
 
-if(startX - endX > 50){
+if(!isDragging) return;
+
+isDragging = false;
+
+let diff = startX - currentX;
+
+if(diff > 50){
 
 next();
 
-}
-
-
-if(endX - startX > 50){
+} else if(diff < -50){
 
 prev();
 
 }
 
-
-timer = setInterval(next, 4000);
+resetTimer();
 
 });
 
@@ -749,31 +947,55 @@ clearInterval(timer);
 
 startX = e.clientX;
 
+isDragging = true;
+
 });
 
 
 
-container.addEventListener("mouseup", (e) => {
+container.addEventListener("mousemove", (e) => {
+
+if(!isDragging) return;
+
+currentX = e.clientX;
+
+});
 
 
-let endX = e.clientX;
 
+container.addEventListener("mouseup", () => {
 
-if(startX - endX > 50){
+if(!isDragging) return;
+
+isDragging = false;
+
+let diff = startX - currentX;
+
+if(diff > 50){
 
 next();
 
-}
-
-
-if(endX - startX > 50){
+} else if(diff < -50){
 
 prev();
 
 }
 
+resetTimer();
 
-timer = setInterval(next, 4000);
+});
+
+
+
+container.addEventListener("mouseleave", () => {
+
+if(isDragging){
+
+isDragging = false;
+
+resetTimer();
+
+}
 
 });
 
