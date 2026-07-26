@@ -7,34 +7,42 @@
 }
 
 :root {
-    --color-primary: blue;
-    --color-primary-glow: rgba(0, 180, 216, 0.2);
-    --color-secondary: #f72585;
-    --color-secondary-glow: rgba(247, 37, 133, 0.2);
-    --color-accent: #7209b7;
+    /* --- Primary & Accent Colors (Inhein badalne se poori website ke buttons ka color change ho jayega) --- */
+    --color-primary: #00b4d8;          /* Main website primary color[cite: 1] */
+    --color-primary-glow: rgba(0, 180, 216, 0.2); /* Primary color ka soft glow effect[cite: 1] */
+    --color-secondary: #f72585;        /* Secondary brand/accent color[cite: 1] */
+    --color-secondary-glow: rgba(247, 37, 133, 0.2); /* Secondary color ka glow effect[cite: 1] */
+    --color-accent: #7209b7;           /* Extra highlight accent color[cite: 1] */
 
-    --color-bg-base: #f4f7f6;
-    --color-bg-section: #ffffff;
-    --color-bg-footer: #e9ecef;
-    --color-surface: #ffffff;
+    /* --- Background & Surface Colors --- */
+    --color-bg-base: #f4f7f6;          /* Pura page ka background color[cite: 1] */
+    --color-bg-section: #ffffff;       /* Cards aur sections ka background color[cite: 1] */
+    --color-bg-footer: #e9ecef;        /* Footer area ka background color[cite: 1] */
+    --color-surface: #ffffff;          /* Containers aur boxes ki surface color[cite: 1] */
 
-    --color-border: rgba(0, 180, 216, 0.25);
+    /* --- Borders & Outlines --- */
+    --color-border: rgba(0, 180, 216, 0.25); /* Cards aur inputs ki border line ka color[cite: 1] */
 
-    --white: #121619;
-    --color-text-body: #374151;
-    --color-text-muted: #6b7280;
+    /* --- Text Colors --- */
+    --white: #121619;                  /* Headings aur dark text ke liye[cite: 1] */
+    --color-text-body: #374151;        /* Normal paragraph text ke liye[cite: 1] */
+    --color-text-muted: #6b7280;       /* Halka/secondary text ya subtitles ke liye[cite: 1] */
 
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
+    /* --- Typography (Fonts) --- */
+    --font-display: 'Space Grotesk', sans-serif; /* Headings ke liye font[cite: 1] */
+    --font-body: 'Plus Jakarta Sans', sans-serif;    /* Normal content ke liye font[cite: 1] */
 
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
+    /* --- Border Radius (Corners ko round karne ke liye) --- */
+    --radius-sm: 6px;                  /* Chhote elements ya buttons ke liye[cite: 1] */
+    --radius-md: 12px;                 /* Medium cards ke liye[cite: 1] */
+    --radius-lg: 20px;                 /* Bade boxes aur sections ke liye[cite: 1] */
 
-    --shadow-sm: 0 4px 15px rgba(0, 180, 216, 0.08);
-    --shadow-md: 0 10px 30px rgba(0, 180, 216, 0.12);
+    /* --- Box Shadows --- */
+    --shadow-sm: 0 4px 15px rgba(0, 180, 216, 0.08);  /* Normal box shadow[cite: 1] */
+    --shadow-md: 0 10px 30px rgba(0, 180, 216, 0.12); /* Hover karne par deeper shadow[cite: 1] */
 
-    --gradient-accent: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    /* --- Gradients --- */
+    --gradient-accent: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); /* Buttons aur highlights ke liye gradient style[cite: 1] */
 }
 
 html {
@@ -93,23 +101,6 @@ video {
     height: auto;
 }
 
-
-/* ========================================== */
-/* 2. Global Resets & Body Styles (Pura Page)  */
-/* ========================================== */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--color-bg-base);
-    font-family: var(--font-body);
-    color: var(--color-text-body);
-    overflow-x: hidden;
-}
-
 /* ========================================== */
 /* 3. Header Styling (Upar ka Navbar)         */
 /* ========================================== */
@@ -130,17 +121,11 @@ body {
     z-index: 1000;
 }
 
-
 .header-left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
-
-
-
-
 
 .menu-btn {
     background: #ffffff;
@@ -218,15 +203,13 @@ body {
 }
 
 /* ========================================== */
-/* Notes / Teacher Cards Grid Styling         */
+/* Notes Grid Container */
 /* ========================================== */
 .notes-grid-container {
     display: flex !important;
-    flex-direction: row !important; /* Cards ko line mein rakhne ke liye */
-    flex-wrap: wrap !important;     /* Agar screen choti ho toh niche aa jayein */
-    align-items: stretch !important; /* Sabhi cards ki height barabar karne ke liye */
-    justify-content: center !important;
-    gap: 24px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
     width: 100% !important;
     padding: 0 15px !important;
 }
@@ -237,20 +220,18 @@ body {
     min-height: 75vh;
 }
 
-/* Sabhi cards ka size ek jaisa fix karne ke liye */
-.notes-grid-container .note-card,
-.card {
-    flex: 1 1 280px !important; /* Minimum width 280px rahegi aur sab barabar stretch honge */
-    max-width: 340px !important; /* Koi bhi card 340px se bada nahi hoga */
+.notes-grid-container .note-card {
     width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+}
+
+.note-card {
     background-color: var(--color-bg-section);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 20px;
     box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -268,18 +249,6 @@ body {
 .note-card p {
     font-size: 0.9rem;
     margin-bottom: 15px;
-    flex-grow: 1; /* Text space ko barabar manage karne ke liye */
-}
-
-/* Cards ke andar wali images ya top boxes ka size equal karne ke liye */
-.note-card img, 
-.note-card .semester-img-box,
-.card img {
-    width: 100% !important;
-    height: 300px !important; /* Teeno ki image/box ki height bilkul equal hogi */
-    object-fit: cover !important;
-    border-radius: 12px;
-    margin-bottom: 15px;
 }
 
 .download-btn {
@@ -290,27 +259,15 @@ body {
     border-radius: var(--radius-sm);
     font-weight: 500;
     font-size: 0.85rem;
-    text-align: center;
-    text-decoration: none;
-    margin-top: auto; /* Button ko hamesha card ke sabse niche align karne ke liye */
 }
 
 main {
     padding-top: 100px !important;
 }
-
-
-main {
-    padding-top: 100px !important;
-    /* Header ki height ke barabar ya usse thoda zyada gap */
-}
-
-
 
 /* ========================================== */
 /* Community Section Styling */
 /* ========================================== */
-
 .community-section {
     padding: 50px 8%;
     background-color: var(--color-bg-base);
@@ -415,7 +372,6 @@ main {
     opacity: 0.95;
 }
 
-
 .telegram-btn {
     background: linear-gradient(135deg, #00b4d8, #0077b6);
     color: #ffffff;
@@ -440,35 +396,9 @@ main {
     box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
 }
 
-.telegram-box {
-    background: linear-gradient(135deg, #00b4d8, #0077b6);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
-}
-
-.whatsapp-box {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-}
-
-.youtube-box {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-}
-
-.instagram-box {
-    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
-}
-
-
-/*==========================================
+/* ========================================== */
 /* Footer */
-/* ==========================================  */
-
+/* ========================================== */
 .site-footer {
     background-color: var(--color-bg-footer);
     border-top: 1px solid var(--color-border);
@@ -499,13 +429,9 @@ main {
     color: var(--color-primary);
 }
 
-
-
-/* ==========================================
-   Responsive Breakpoints
-   ========================================== */
-
-
+/* ========================================== */
+/* Responsive Breakpoints */
+/* ========================================== */
 @media (max-width: 1024px) {
     header {
         padding: 15px 4%;
@@ -513,10 +439,6 @@ main {
 
     main {
         padding: 90px 4% 30px;
-    }
-
-    .hero-section {
-        gap: 30px;
     }
 }
 
@@ -528,39 +450,8 @@ main {
         position: relative;
     }
 
-    header nav ul {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    header nav a {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-    }
-
     main {
         padding: 20px 15px;
-    }
-
-    .hero-section {
-        flex-direction: column;
-        text-align: center;
-        min-height: auto;
-        padding: 20px 0;
-        gap: 25px;
-    }
-
-    .left-hero {
-        align-items: center;
-    }
-
-    #cta {
-        justify-content: center;
-    }
-
-    .notes-grid-container {
-        grid-template-columns: 1fr;
     }
 
     .footer-container {
@@ -577,45 +468,22 @@ main {
     h2 {
         font-size: 1.4rem;
     }
-
-    #cta {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    #cta a {
-        width: 100%;
-    }
 }
 
-/* ==========================================  */
+/* ========================================== */
 /* Contact Page Specific Styles */
-/* ==========================================  */
+/* ========================================== */
 .notes-grid-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 450px));
-    /* Dono cards ki fixed width range set karne ke liye */
     justify-content: center;
-    /* Grid ko bilkul center mein lane ke liye */
     gap: 30px;
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-.support-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
-    border-radius: var(--radius-lg);
-    padding: 35px 30px;
-    /* Padding badhayi taaki box lamba/bada lage */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.note-card {
+.support-card, .note-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-sm);
@@ -634,22 +502,8 @@ main {
     margin-bottom: 16px;
 }
 
-.support-card strong {
-    color: var(--color-text-primary);
-}
-
 .social-link {
     color: var(--color-primary);
-}
-
-.form-card {
-    grid-column: span 1;
-    /* Ab yeh sirf 1 column lega kyunki total hi 2 columns hain */
-}
-
-.form-card h3 {
-    color: var(--color-text-primary);
-    margin-bottom: 5px;
 }
 
 #contact-form {
@@ -659,17 +513,13 @@ main {
     margin-top: 15px;
 }
 
-/* ========================================== */
-/* Input & Textarea Styling with Glow Effect */
-/* ========================================== */
-
 #contact-form input,
 #contact-form textarea {
     width: 100%;
     padding: 14px;
     background: var(--color-bg-section);
     border: 1px solid var(--color-border);
-    color: var(--color-text-primary);
+    color: var(--color-text-body);
     border-radius: var(--radius-lg);
     box-sizing: border-box;
     font-size: 14px;
@@ -677,10 +527,6 @@ main {
     transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
 }
-
-/* ========================================== */
-/* Focus Glow Effect */
-/* ========================================== */
 
 #contact-form input:focus,
 #contact-form textarea:focus {
@@ -700,7 +546,7 @@ main {
     border: none;
     text-align: center;
     background: var(--gradient-accent);
-    color: var(--color-surface);
+    color: #ffffff;
     font-weight: 600;
     border-radius: 10px;
     font-size: 15px;
@@ -712,21 +558,16 @@ main {
 }
 
 /* ========================================== */
-/* teacher ka photo box styling */
+/* Teacher Photo Box Styling */
 /* ========================================== */
-
 .teacher-img-box {
     width: 100%;
-    height: 220px;
-    /* Apni zaroorat ke hisab se height adjust kar sakte hain */
+    height: 350px;
     border-radius: 12px;
-    /* Photo ko radius dene ke liye */
     overflow: hidden;
     margin-bottom: 15px;
     box-shadow: 0 4px 12px rgba(255, 0, 0, 0.219);
-    /* Halka sa shadow */
     background: var(--color-bg-section);
-    /* Agar image load nahi hoti to background color */
 }
 
 .teacher-img-box img {
@@ -736,7 +577,7 @@ main {
 }
 
 /* ========================================== */
-/* Sidebar Background Overlay (Dim Effect)    */
+/* Sidebar Background Overlay & Drawer        */
 /* ========================================== */
 .sidebar-overlay {
     position: fixed;
@@ -758,14 +599,10 @@ main {
     visibility: visible;
 }
 
-/* ========================================== */
-/* Sidebar Drawer Box Styling                 */
-/* ========================================== */
 .sidebar-drawer {
     position: fixed;
     top: 0;
     left: -320px;
-    /* Shuru mein screen se bahar chhipa rahega */
     width: 300px;
     height: 100%;
     background-color: #ffffff;
@@ -780,9 +617,6 @@ main {
     left: 0;
 }
 
-/* ========================================== */
-/* Sidebar Header (Logo & Close Button)       */
-/* ========================================== */
 .sidebar-header {
     display: flex;
     align-items: center;
@@ -808,12 +642,6 @@ main {
     box-shadow: 0 4px 12px rgba(0, 180, 216, 0.25);
 }
 
-.sidebar-logo-icon img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-
 .sidebar-title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.95rem;
@@ -822,16 +650,6 @@ main {
     letter-spacing: 0.03em;
 }
 
-.sidebar-subtitle {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: green;
-    letter-spacing: 0.05em;
-    margin-top: 2px;
-}
-
-/* Close ('X') Button */
 .sidebar-close-btn {
     background: #f7fafc;
     border: 1px solid #e2e8f0;
@@ -850,9 +668,6 @@ main {
     background: #edf2f7;
 }
 
-/* ========================================== */
-/* Sidebar Navigation List & Items            */
-/* ========================================== */
 .sidebar-nav {
     flex: 1;
     overflow-y: auto;
@@ -880,14 +695,6 @@ main {
     transition: all 0.2s ease;
 }
 
-.nav-icon {
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-}
-
 .nav-item:hover {
     background-color: rgba(0, 180, 216, 0.08);
     color: #00b4d8;
@@ -899,19 +706,17 @@ main {
     font-weight: 700;
 }
 
-
 /* ========================================== */
-/* Developer Profile Card & About Page Styles */
+/* Developer Section & Welcome Hero Styles    */
 /* ========================================== */
-
-.developer-section {
+.developer-section, .welcome-hero-section {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
 }
 
-.developer-card {
+.developer-card, .welcome-card {
     background: var(--color-surface, #ffffff);
     border: 1px solid var(--color-border, #e2e8f0);
     border-radius: 24px;
@@ -924,12 +729,6 @@ main {
     align-items: center;
 }
 
-/* Image Container */
-.dev-img-container {
-    position: relative;
-    flex-shrink: 0;
-}
-
 .dev-avatar {
     width: 100px;
     height: 100px;
@@ -938,105 +737,6 @@ main {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.596);
 }
 
-.dev-floating-badge {
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: white;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
-    /* border: 3px solid var(--color-surface, #ffffff); */
-    animation: floatAnimation 3s ease-in-out infinite;
-}
-
-
-/* Animation Define Karein */
-@keyframes floatAnimation {
-    0% {
-        transform: translateY(0); /* Apni original position par */
-    }
-    50% {
-        transform: translateY(-10px); /* Apni position se 10px upar jayega */
-    }
-    100% {
-        transform: translateY(0); /* Wapas original position par */
-    }
-}
-
-/* Info Section */
-.dev-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.badge-top {
-    display: inline-block;
-    background: rgba(99, 102, 241, 0.1);
-    color: #6366f1;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 15px;
-    align-self: flex-start;
-}
-
-.dev-info h2 {
-    font-size: 2.2rem;
-    color: var(--color-text-primary, #1e293b);
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.dev-subtitle {
-    color: #10b981;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-}
-
-.dev-tag {
-    background: rgba(99, 102, 241, 0.06);
-    color: #4f46e5;
-    padding: 8px 14px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 20px;
-    align-self: flex-start;
-}
-
-.dev-tag span {
-    color: #6366f1;
-    margin-right: 5px;
-}
-
-.dev-bio {
-    color: var(--color-text-muted, #64748b);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.dev-quote {
-    color: #4f46e5;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 25px;
-}
-
-/* Social Buttons */
 .dev-social-buttons {
     display: flex;
     gap: 12px;
@@ -1051,294 +751,34 @@ main {
     border: 1px solid var(--color-border, #e2e8f0);
     border-radius: 25px;
     text-decoration: none;
-    color: var(--color-text-primary, #1e293b);
+    color: var(--color-text-body, #1e293b);
     font-size: 0.9rem;
     font-weight: 600;
     background: var(--color-surface, #ffffff);
     transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
 .dev-btn:hover {
     border-color: #6366f1;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
-
-/* Developer Card ka saara text bold karne ke liye */
-.developer-card *, 
-.developer-card p, 
-.developer-card span, 
-.developer-card h2, 
-.developer-card a {
-    font-weight: 800 !important;
-}
-
-
-/* Responsive for Mobile */
 @media (max-width: 768px) {
-    .developer-card {
+    .developer-card, .welcome-card {
         flex-direction: column;
         text-align: center;
         padding: 25px;
     }
-    .badge-top, .dev-tag {
-        align-self: center;
-    }
-    .dev-social-buttons {
-        justify-content: center;
-    }
 }
-
 
 /* ========================================== */
-/* Welcome Hero Card Styling                  */
+/* Auto Color Change Keyframes & Media Queries*/
 /* ========================================== */
-
-.welcome-hero-section {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.welcome-card {
-    background: var(--color-surface, #ffffff);
-    border: 1px solid var(--color-border, #e2e8f0);
-    border-radius: 28px;
-    padding: 45px 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1000px;
-    width: 100%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    position: relative;
-    overflow: hidden;
-}
-
-/* --- Left Content Styles --- */
-.welcome-content {
-    max-width: 520px;
-    z-index: 2;
-}
-
-.greeting-badge {
-    color: #64748b;
-    font-weight: 800 !important;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-}
-
-.welcome-title {
-    font-size: 2.8rem;
-    font-weight: 900 !important;
-    color: #1e293b;
-    line-height: 1.15;
-    margin-bottom: 15px;
-    letter-spacing: -0.5px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.highlight-brand {
-    color: #6366f1;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.welcome-subtitle {
-    color: #64748b;
-    font-size: 1.05rem;
-    font-weight: 700 !important;
-    line-height: 1.5;
-    margin-bottom: 30px;
-}
-
-/* Button Group */
-.welcome-btn-group {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 800 !important;
-    font-size: 0.95rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
-}
-
-.btn-secondary {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #1e293b;
-    padding: 12px 24px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 800 !important;
-    font-size: 0.95rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.btn-secondary:hover {
-    background: #f8fafc;
-    transform: translateY(-2px);
-}
-
-.btn-icon {
-    font-size: 1rem;
-}
-
-/* --- Right Graphic Area --- */
-.welcome-graphic {
-    position: relative;
-    width: 280px;
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.graphic-center-art {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.grad-cap {
-    font-size: 80px;
-    z-index: 2;
-    transform: rotate(-10deg);
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
-}
-
-.stacked-books {
-    position: relative;
-    margin-top: -25px;
-}
-
-.book {
-    width: 140px;
-    height: 22px;
-    border-radius: 6px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.book-top {
-    background: #4f46e5;
-    transform: rotate(-3deg);
-    margin-bottom: 4px;
-}
-
-.book-bottom {
-    background: #312e81;
-    transform: rotate(2deg);
-}
-
-/* Floating Icons */
-.floating-icon {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 18px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-    animation: floatIcon 3s ease-in-out infinite;
-}
-
-.icon-book {
-    background: #10b981;
-    top: 20px;
-    left: 0;
-    animation-delay: 0s;
-}
-
-.icon-trophy {
-    background: #f59e0b;
-    bottom: 10px;
-    left: 30px;
-    animation-delay: 1s;
-}
-
-.icon-play {
-    background: #ff2b6d;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    animation-delay: 1.5s;
-}
-
-
-/* Smooth Floating Animation */
-@keyframes floatIcon {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-/* Responsive Styles for Mobile */
-@media (max-width: 850px) {
-    .welcome-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-    }
-
-    .welcome-content {
-        max-width: 100%;
-        margin-bottom: 30px;
-    }
-
-    .welcome-btn-group {
-        justify-content: center;
-    }
-
-    .welcome-title {
-        font-size: 2.1rem;
-    }
-}
-
-
-
-
-
-
-/* ========================================== */
-/* AUTO COLOR CHANGE */
-/* ========================================== */
-
-/* Gradient Text Color Sliding Animation */
-
-
 .auto-color-logo .logo-text,
-.welcome-title .highlight-brand, .sidebar-title, .dev-tag, .gradient-text{
+.welcome-title .highlight-brand, 
+.sidebar-title, 
+.dev-tag, 
+.gradient-text{
     background: linear-gradient(270deg, #6366f1, #ec4899, #06b6d4, #10b981, #6366f1);
     background-size: 400% 400%;
     -webkit-background-clip: text;
@@ -1347,51 +787,11 @@ main {
     font-weight: 900 !important;
 }
 
-Dot Animation
-
-.auto-color-logo .logo-dot,
-.promo-left-accent .highlight-brand .dev-floating-badge {
-    animation: dotColorSlide 6s linear infinite !important;
+@keyframes gradientColorSlide {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-
-/* Keyframes for Smooth Sliding */
-
- @keyframes gradientColorSlide {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-} 
-
-@keyframes dotColorSlide {
-    0%   { background-color: #6366f1; box-shadow: 0 0 10px #6366f1; }
-    25%  { background-color: #ec4899; box-shadow: 0 0 10px #ec4899; }
-    50%  { background-color: #06b6d4; box-shadow: 0 0 10px #06b6d4; }
-    75%  { background-color: #10b981; box-shadow: 0 0 10px #10b981; }
-    100% { background-color: #6366f1; box-shadow: 0 0 10px #6366f1; }
-} 
-
-
-
-
-
-.coming-soon-btn {
-    background: linear-gradient(135deg, #00b4d8, #d946ef);
-    color: white;
-    font-weight: bold;
-    padding: 12px 20px;
-    border-radius: 8px;
-    border: none;
-    text-align: center;
-    display: inline-block;
-}
-
-/* Jab screen badi ho (Tablet / Laptop), tab wapas 3 columns ho jayein */
 
 @media screen and (min-width: 768px) {
     .notes-grid-container {
