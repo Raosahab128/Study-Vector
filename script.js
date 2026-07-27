@@ -98,3 +98,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 });
+
+
+
+
+import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+const supabaseUrl = 'https://vicky124833r-733...supabase.co' // Yahan apni project URL paste karein
+const supabaseKey = 'Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-'
+
+const supabase = createClient(supabaseUrl, supabaseKey)
+
