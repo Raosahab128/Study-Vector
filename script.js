@@ -109,3 +109,31 @@ const supabaseKey = 'Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-'
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+// Form submit hone ka code kuch is tarah hona chahiye:
+const contactForm = document.querySelector('#contactForm'); // Aapke form ki ID
+
+if (contactForm) {
+    contactForm.addEventListener('submit async', async (e) => {
+        e.preventDefault(); // Page ko refresh hone se rokn ke liye
+
+        // Yahan aapke inputs ki values hongi
+        const name = document.querySelector('#name').value;
+        const email = document.querySelector('#email').value;
+        const message = document.querySelector('#message').value;
+
+        // Supabase mein data bhejna
+        const { data, error } = await supabase
+            .from('messages') // Aapke table ka naam
+            .insert([{ name: name, email: email, message: message }]);
+
+        if (error) {
+            alert('Error: ' + error.message);
+        } else {
+            // YAHAN SUCCESS MESSAGE DIKHANE KA CODE HAI
+            alert('Message sent successfully!'); // Ya aap chahein toh kisi HTML element mein text dikha sakte hain
+            contactForm.reset(); // Form clear karne ke liye
+        }
+    });
+}
+
+
