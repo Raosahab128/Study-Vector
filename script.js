@@ -1,5 +1,5 @@
 // ============================================================
-// Study Vector - script.js
+// Study Vector - script.js (Direct REST API Integration)
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -31,15 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
   if (sidebarOverlay) {
     sidebarOverlay.addEventListener('click', closeSidebar);
   }
-  // Close on Escape key
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeSidebar();
   });
 
 
-  // ---------- 2. Contact Form & Supabase Integration ----------
+  // ---------- 2. Contact Form & Direct REST API Integration ----------
   const SUPABASE_URL = "https://vicky124833r-733.supabase.co"; 
-  const SUPABASE_ANON_KEY = "Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
 
   const contactForm = document.getElementById('contact-form');
 
@@ -69,29 +68,21 @@ document.addEventListener('DOMContentLoaded', function () {
           submitBtn.textContent = 'Sending...';
         }
 
-        const client = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/contacts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_PUBLISHABLE_KEY,
+            'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ name: name, email: email, message: message })
+        });
 
-        if (!client) {
-          alert('Supabase library loaded nahi hai!');
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-          }
-          return;
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.message || 'Failed to send message.');
         }
-
-        // Timeout promise taaki request fasi na rahe
-        const insertPromise = client
-          .from('contacts')
-          .insert([{ name: name, email: email, message: message }]);
-
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Request timed out. Check your connection.')), 6000)
-        );
-
-        const { error } = await Promise.race([insertPromise, timeoutPromise]);
-
-        if (error) throw error;
 
         alert('Message sent successfully!');
         contactForm.reset();
