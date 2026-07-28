@@ -1,35 +1,28 @@
 // ============================================================
 // Study Vector - script.js
-// Powers: hamburger menu / sidebar drawer, and the contact form.
-// This file was missing from the site, which is why the ☰ menu
-// button and the contact form did nothing.
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ---------- Sidebar drawer (hamburger menu) ----------
+  // ---------- 1. Sidebar Drawer (Hamburger Menu) ----------
   const menuToggle = document.getElementById('menuToggle');
   const sidebarDrawer = document.getElementById('sidebarDrawer');
   const sidebarOverlay = document.getElementById('sidebarOverlay');
-  const sidebarClose = document.getElementById('sidebarClose');
 
   function openSidebar() {
-    if (sidebarDrawer) sidebarDrawer.classList.add('active');
+    if (sidebarDrawer) sidebarDrawer.classList.add('open', 'active');
     if (sidebarOverlay) sidebarOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeSidebar() {
-    if (sidebarDrawer) sidebarDrawer.classList.remove('active');
+    if (sidebarDrawer) sidebarDrawer.classList.remove('open', 'active');
     if (sidebarOverlay) sidebarOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
 
   if (menuToggle) {
     menuToggle.addEventListener('click', openSidebar);
-  }
-  if (sidebarClose) {
-    sidebarClose.addEventListener('click', closeSidebar);
   }
   if (sidebarOverlay) {
     sidebarOverlay.addEventListener('click', closeSidebar);
@@ -40,28 +33,30 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-  // ---------- Contact form ----------
-  // NOTE: Fill in your Supabase project URL and public anon key below
-  // to make this actually store messages. Get these from your Supabase
-  // project dashboard -> Settings -> API.
-  const SUPABASE_URL = "YOUR_SUPABASE_URL_HERE";
-  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY_HERE";
+  // ---------- 2. Contact Form & Supabase Integration ----------
+  // Apni exact Supabase Project URL yahan daalein
+  const SUPABASE_URL = "https://vicky124833r-733.supabase.co"; 
+  const SUPABASE_ANON_KEY = "Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
 
-  const contactForm = document.getElementById('contact-form');
+  const contactForm = document.querySelector('#contactForm') || document.getElementById('contact-form');
+
   if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
+      const nameInput = document.querySelector('#name');
+      const emailInput = document.querySelector('#email');
+      const messageInput = document.querySelector('#message');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
+
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.textContent : '';
 
-      if (!name || !email || !message) return;
-
-      if (SUPABASE_URL === "YOUR_SUPABASE_URL_HERE") {
-        alert("Contact form isn't connected to a database yet. Add your Supabase URL and key in script.js.");
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
         return;
       }
 
@@ -71,24 +66,38 @@ document.addEventListener('DOMContentLoaded', function () {
           submitBtn.textContent = 'Sending...';
         }
 
-        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        const { error } = await client
-          .from('contact_messages')
-          .insert([{ name: name, email: email, message: message }]);
-
-        if (error) throw error;
-
-        contactForm.reset();
-        if (submitBtn) submitBtn.textContent = 'Message sent!';
-        setTimeout(() => {
+        // Supabase client initialize karna (Global script tag ke zariye)
+        const client = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+        
+        if (!client) {
+          alert('Supabase library loaded nahi hai!');
           if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
           }
-        }, 2500);
+          return;
+        }
+
+        // Aapki Supabase table ka naam 'contacts' hai
+        const { error } = await client
+          .from('contacts')
+          .insert([{ name: name, email: email, message: message }]);
+
+        if (error) throw error;
+
+        alert('Message sent successfully!');
+        contactForm.reset();
+
+        if (submitBtn) {
+          submitBtn.textContent = 'Message sent!';
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }, 2500);
+        }
       } catch (err) {
         console.error('Contact form error:', err);
-        alert('Something went wrong sending your message. Please try again or message us on Telegram.');
+        alert('Error: ' + (err.message || 'Something went wrong.'));
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
@@ -99,41 +108,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
-
-
-import { createClient } from 'https://esm.sh/@supabase/supabase-js'
-
-const supabaseUrl = 'https://vicky124833r-733...supabase.co' // Yahan apni project URL paste karein
-const supabaseKey = 'Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-'
-
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-// Form submit hone ka code kuch is tarah hona chahiye:
-const contactForm = document.querySelector('#contactForm'); // Aapke form ki ID
-
-if (contactForm) {
-    contactForm.addEventListener('submit async', async (e) => {
-        e.preventDefault(); // Page ko refresh hone se rokn ke liye
-
-        // Yahan aapke inputs ki values hongi
-        const name = document.querySelector('#name').value;
-        const email = document.querySelector('#email').value;
-        const message = document.querySelector('#message').value;
-
-        // Supabase mein data bhejna
-        const { data, error } = await supabase
-            .from('messages') // Aapke table ka naam
-            .insert([{ name: name, email: email, message: message }]);
-
-        if (error) {
-            alert('Error: ' + error.message);
-        } else {
-            // YAHAN SUCCESS MESSAGE DIKHANE KA CODE HAI
-            alert('Message sent successfully!'); // Ya aap chahein toh kisi HTML element mein text dikha sakte hain
-            contactForm.reset(); // Form clear karne ke liye
-        }
-    });
-}
 
 
