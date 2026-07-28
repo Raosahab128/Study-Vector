@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // ---------- 2. Contact Form & Direct REST API Integration ----------
-  const SUPABASE_URL = "https://gfvqaowjvjstgbptcjlh.supabase.co](https://gfvqaowjvjstgbptcjlh.supabase.co"; 
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
+  const SUPABASE_URL = "https://gfvqaowjvjstgbptcjlh.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
 
   const contactForm = document.getElementById('contact-form');
 
