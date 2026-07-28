@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const menuToggle = document.getElementById('menuToggle');
   const sidebarDrawer = document.getElementById('sidebarDrawer');
   const sidebarOverlay = document.getElementById('sidebarOverlay');
+  const sidebarClose = document.getElementById('sidebarClose');
 
   function openSidebar() {
     if (sidebarDrawer) sidebarDrawer.classList.add('open', 'active');
@@ -24,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (menuToggle) {
     menuToggle.addEventListener('click', openSidebar);
   }
+  if (sidebarClose) {
+    sidebarClose.addEventListener('click', closeSidebar);
+  }
   if (sidebarOverlay) {
     sidebarOverlay.addEventListener('click', closeSidebar);
   }
@@ -37,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const SUPABASE_URL = "https://vicky124833r-733.supabase.co"; 
   const SUPABASE_ANON_KEY = "Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
 
-  // Yahan id ko #contact-form kar diya gaya hai
   const contactForm = document.getElementById('contact-form');
 
   if (contactForm) {
@@ -77,9 +80,16 @@ document.addEventListener('DOMContentLoaded', function () {
           return;
         }
 
-        const { error } = await client
+        // Timeout promise taaki request fasi na rahe
+        const insertPromise = client
           .from('contacts')
           .insert([{ name: name, email: email, message: message }]);
+
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timed out. Check your connection.')), 6000)
+        );
+
+        const { error } = await Promise.race([insertPromise, timeoutPromise]);
 
         if (error) throw error;
 
