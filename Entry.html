@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AS Multiverse</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #05070f;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  /* ===== Splash Screen ===== */
+  #splash-screen {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #0d1730 0%, #05070f 75%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .logo-wrap {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  .logo-wrap::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #3b9bff, transparent 60%, #3b9bff);
+    animation: spin 3s linear infinite;
+    filter: blur(2px);
+  }
+
+  .logo-wrap::after {
+    content: "";
+    position: absolute;
+    width: 92%;
+    height: 92%;
+    border-radius: 50%;
+    background: #05070f;
+  }
+
+  .logo-wrap img {
+    position: relative;
+    width: 82%;
+    height: 82%;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 25px rgba(59, 155, 255, 0.35);
+  }
+
+  .brand-text {
+    margin-top: 28px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.3s forwards;
+  }
+
+  .brand-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #ffffff;
+  }
+
+  .brand-text span {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #6f8bb8;
+    font-weight: 400;
+  }
+
+  .loader-bar {
+    margin-top: 34px;
+    width: 160px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.5s forwards;
+  }
+
+  .loader-bar span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #3b9bff, #7ad0ff);
+    border-radius: 10px;
+    animation: load 1.4s ease forwards;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes load {
+    to { width: 100%; }
+  }
+
+  #splash-screen.hide {
+    opacity: 0;
+    transform: scale(1.03);
+    pointer-events: none;
+  }
+
+  /* ===== Main Content (demo) ===== */
+  .main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+    background: #05070f;
+  }
+
+  .main-content h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  .main-content p {
+    color: #8ea3c4;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <div class="logo-wrap">
+      <img src="logo.png" alt="AS Multiverse Logo" />
+    </div>
+    <div class="brand-text">
+      <h1>AS MULTIVERSE</h1>
+      <span>ONE UNIVERSE, INFINITE POSSIBILITIES</span>
+    </div>
+    <div class="loader-bar"><span></span></div>
+  </div>
+
+  <!-- Main Website Content -->
+  <div class="main-content">
+    <h1>Welcome to AS Multiverse</h1>
+    <p>One Universe, Infinite Possibilities.</p>
+  </div>
+
+  <script>
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        var splash = document.getElementById("splash-screen");
+        splash.classList.add("hide");
+        setTimeout(function () {
+          splash.style.display = "none";
+        }, 800);
+      }, 1800); // splash total duration
+    });
+  </script>
+
+</body>
+</html>
