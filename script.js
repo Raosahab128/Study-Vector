@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // ---------- 2. Contact Form & Supabase Integration ----------
-  // Apni exact Supabase Project URL yahan daalein
   const SUPABASE_URL = "https://vicky124833r-733.supabase.co"; 
   const SUPABASE_ANON_KEY = "Sb_publishable_lrvVlwmEK2o1W5DtKFylMw_tjgotu0-";
 
-  const contactForm = document.querySelector('#contactForm') || document.getElementById('contact-form');
+  // Yahan id ko #contact-form kar diya gaya hai
+  const contactForm = document.getElementById('contact-form');
 
   if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
@@ -66,9 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
           submitBtn.textContent = 'Sending...';
         }
 
-        // Supabase client initialize karna (Global script tag ke zariye)
         const client = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-        
+
         if (!client) {
           alert('Supabase library loaded nahi hai!');
           if (submitBtn) {
@@ -78,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
           return;
         }
 
-        // Aapki Supabase table ka naam 'contacts' hai
         const { error } = await client
           .from('contacts')
           .insert([{ name: name, email: email, message: message }]);
@@ -107,6 +105,3 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 });
-
-
-
